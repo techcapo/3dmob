@@ -1,0 +1,34 @@
+palette
+
+face
+normal #EAAE75
+skelly #B6CAD7
+
+type 
+
+dark #3B3A3A
+light brown #825039 
+brown #442623
+skelly #92A4AD
+
+
+clothes
+blue shirt #0a5ef2 
+red shirt #C83C3C
+
+hats
+black cap/hat #222
+white fedora FFFEFE
+white fedora gold FABF38
+
+
+shades
+retro #12D1A0
+
+lips
+bubblegum #B95A73
+
+
+smokes
+pipe 5C3B27
+smoke 6E6971

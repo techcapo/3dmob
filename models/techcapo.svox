@@ -1,0 +1,32 @@
+model
+size = 11 17 16
+scale = 0.05
+rotation = 0 0 0
+origin = -y
+
+material lighting = flat, roughness = 0.3, metalness = 1
+  colors = J(6):#FFFF00
+
+material lighting = flat
+  colors = E(138):#663300 F(225):#110000 G(52):#CC9966 H(147):#33FF99 I(145):#33FFFF K(211):#0000FF L(146):#33FFCC M(25):#FF33FF N(255):#111111 O(245):#000011 P(67):#CC00FF
+
+material lighting = smooth, scatter = 0.1, roughness = 0.3, metalness = 0.1, deform = 2.9 0.5 1, opacity = 1
+  colors = Q(216):#EE0000
+
+voxels =
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ----EEE---- ---EEEEE--- ---EEEEE--- ---EEEEE--- ---EEEEE--- ---MMMMM--- ---MMMMM--- ----MMM---- ----------- -----------
+----------- ----------- ----------- ----------- ----------- ----------- ---EEEEE--- --EEEEEEE-- --EEEEEEE-- --EEEEEEE-- --EEEEEEE-- --EEEEEEE-- --MMMMMMM-- --MMMMMMM-- ---MMMMM--- ----MMM---- -----------
+----------- ----------- ----------- ----------- ----------- ---EEEEE--- --EEEEEEE-- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -MMMMMMMMM- -MMMMMMMMM- --MMMMMMM-- ---MM-MM--- -----M-----
+----------- ----------- ----------- ----------- ---EEEEE--- --EEEEEEE-- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -MMKKMMMMM- -MMKKMMMMM- -MMKKMMMMM- --MMK-MMM-- ----MMM----
+----EEE---- ----EEE---- ----EEE---- ---EEEEE--- --EEEEEEE-- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- JEEEEEEEEEJ GEEEEEEEEEG ONEEEEEEENO -EEEEEEEEE- -IMKKMMMMI- -MMKKMMMMM- -MMKKMMMMM- --MMK-KMM-- ----MMM----
+---EEEEE--- ---EEEEE--- ---EEEEE--- --EEEEEEE-- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- ONEEEEEEENO -EEEEEEEEE- -IMKKKKKKI- -IMKKKKKKI- -MMKKKKKMM- --MMK-KMM-- ----MMM----
+---EEEEE--- ---EEEEE--- ---EEEEE--- --EEEEEEE-- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- ONEEEEEEENO -EEEEEEEEE- -IMKKKKKKI- -IMKKKKIII- -IMKKKKIII- --IIKKIII-- ----III----
+----EEE---- ----EEE---- ----EEE---- --EEEEEEE-- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- ONEEEEEEEOO -EEEEEEEEE- -LKKKKKKKI- -IKKKKKKII- -IIIKKKIII- --IIIIIII-- ----III----
+----------- ----------- ----------- --EEEEEEE-- --EEEEEEE-- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- -EEEEEEEEE- ONEEEEEEEOO -EEEEEEEEE- -HKKKKKKKH- -LIIKKKKII- --IIKKKII-- ---IIIII--- ----III----
+----------- ----------- ----------- ---EEEEE--- --EEEEEEE-- --EEEEEEE-- --EEEEEEE-- --EEEEEEE-- --EEEEEEE-- --EEEEEEE-- -ONEEEEEEO- --EEEEEEE-- -HHKKKKKHH- --LIKKKKL-- --IIKKKII-- ---IIIII--- -----I-----
+----------- ----------- ----------- ----GGG---- ---GGGGG--- --GGGGGGG-- --GGEEEGG-- --EGEEEGE-- --GEEEEEG-- --GEEEEEG-- -OGEEEEEGO- --EEEEEEE-- -HHKKKKKHH- --LIKKKKL-- ---LIIIL--- ----III---- -----------
+----------- ----------- ----------- ----GGG---- ---GGGGG--- ---GGGGG--- ---GGGGG--- ---GGGGG--- ---GGGGG--- ---GGGGG--- -O-GGGGG-O- ---GGEGG--- -HHKKKKKHH- ---LLLLL--- ----LLL---- ----------- -----------
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- --NNO-OON-- -OONOOOOOO- ----------- -HHHHHHHHH- ----------- ----------- ----------- -----------
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- --HHHHHHH-- ----------- ----------- ----------- -----------
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ---HHHHH--- ----------- ----------- ----------- -----------
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----HHH---- ----------- ----------- ----------- -----------

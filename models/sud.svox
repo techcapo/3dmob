@@ -1,0 +1,31 @@
+model
+size = 11 18 20
+scale = 0.05
+origin = -y
+
+material lighting = flat, roughness = 0.3, metalness = 1
+  colors = S(248):#c0c0c0
+
+material lighting = flat
+  colors = F(138):#825039 G(225):#110000 H(52):#ebae75 I(147):#33FF99 J(145):#33FFFF K(211):#0000FF L(146):#33FFCC M(25):#FF33FF N(255):#111111 O(245):#222 P(67):#CC00FF Q(216):#EE0000 R(236):#0a5ef2 T(218):#BB0000 U(246):#EEEEEE
+voxels =
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ---OOOOO--- ----------- ----------- ----------- -----------
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ----FFF---- ---FFFFF--- ---FFFFF--- ---FFFFF--- ---FFFFF--- ---FFFFF--- --OOFFFOO-- ----UUU---- ----OOO---- ----OOO---- -----O-----
+----------- ----------- ----------- ----------- ----------- ----------- ---FFFFF--- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- -OOFFFFFOO- ---UFFFU--- ---OOOOO--- ---OOOOO--- ---OOOOO---
+----------- ----------- ----------- ----------- ----------- ---FFFFF--- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- OOFFFFFFFOO --UFFFFFU-- --OOFFFOO-- --OOOOOOO-- --OO---OO--
+----------- ----------- ----------- ----------- ---FFFFF--- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- OFFFFFFFFFO -UFFFFFFFU- -OOFFFFFOO- -OOOOOOOOO- -OO-OOO-OO-
+----RRR---- ----RRR---- ----FFF---- ---FFFFF--- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- HFFFFFFFFHH HFFFFFFFFFH -FFFFFFFFF- -FFFFFFFMF- OFFFFFFFMFO -UFFFFFFFU- -OOFFFFFOO- -OOOOOOOOO- -O-OOOOO-O-
+---RRRRR--- ---RRRRR--- ---FFFFF--- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFKF- OFFFFFFFKFO -UFFFFFFFU- -OOFFFFFOO- -OOOOOOOOO- -O-OOOOO-O-
+---RRRRR--- ---RRRRR--- ---FFFFF--- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFKF- OFFFFFFFJFO -UFFFFFFFU- -OOFFFFFOO- -OOOOOOOOO- -OO-OOO-OO-
+----RRR---- ----RRR---- ----FFF---- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFKF- OFFFFFFFJFO -UFFFFFFFU- -OOFFFFFOO- -OOOOOOOOO- --OO-O-OO--
+----------- ----------- ----------- --FFFFFFF-- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFKF- OFFFFFFFFFO -UFFFFFFFU- -OOOFFFOOO- --OOOOOOO-- ---OO-OO---
+----------- ----------- ----------- ---FFFFF--- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- OOFFFFFFFOO --UFFFFFU-- --OOOFOOO-- ---OOOOO--- ----OOO----
+----------- ----------- ----------- ----HHH---- ---HHHHH--- --HHHHHHH-- --HHFFFHH-- --FHFFFHF-- --HFFFFFH-- --HFFFFFH-- --HFFFFFH-- --FFFFFFF-- --FFFFFFF-- -OOFFFFFOO- ---UFFFU--- ---OOOOO--- ----OOO---- -----O-----
+----------- ----------- ----------- ----HHH---- ---HHHHH--- ---HSSHH--- ---HHHHH--- ---HHHHH--- ---HOHOH--- ---HOHOH--- ---HHHHH--- ---HHFHH--- ---FFFFF--- --OOFFFOO-- ----UUU---- ----OOO---- -----O----- -----------
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ---OOOOO--- ----------- ----------- ----------- -----------
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- -----------
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- -----------
+TT--T-T-TT- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- -----------
+TTT-T-T-T-T ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- -----------
+--T-T-T-T-T ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- -----------
+TTT--TT-TTT ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- -----------
