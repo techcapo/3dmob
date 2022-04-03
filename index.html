@@ -59,11 +59,28 @@ ${baseMonkie}
       `;
     </script>
 
+    <style>
+      aside {
+        width:  200px;
+        height: 100%;
+        display:  inline-block;
+        position:  fixed;
+      }
+      main {
+        margin-left:  200px;
+        width:  400px;
+        height: 400px;
+        padding: 0;
+      }
+    </style>
+
   </head>
   <body>
-    <a-scene id="scene" background="color: #7CE3B6">
+    <aside>foobar</aside>
 
-      <!-- The svox a-frame component entity for the cherry -->
+    <main>
+    <a-scene id="scene" background="color: #7CE3B6" vr-mode-ui="false" embedded>
+
       <a-entity
         svox="model:MobMonkie; worker:false;"
         position="0 1.6 -2"
@@ -71,5 +88,9 @@ ${baseMonkie}
       </a-entity>
 
     </a-scene>
+
+    </main>
+
+
   </body>
 </html>
