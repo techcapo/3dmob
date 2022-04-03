@@ -1,0 +1,30 @@
+model
+size = 11 17 12
+scale = 0.1
+origin = -y
+material lighting = flat, roughness = 0.3, metalness = 1, deform = 1 0.2, scatter = 0.02
+  colors = A:#7D3C40
+material lighting = flat, deform = 2 1, scatter = 0.2
+  colors = B:#080
+material lighting = both, roughness = 0, metalness = 1, opacity = 0.7, deform = 10 1, clamp = y
+  colors = C:#8CF
+material lighting = flat, roughness = 0.5
+  colors = D:#138
+material lighting = flat, roughness = 0.2, metalness = 0.5, emissive = #E00 0.5, deform = 3 0.1, scatter = 0.25
+  colors = E(216):#EE0000
+material lighting = flat
+  colors = F(138):#663300 G(52):#CC9966 H(245):#000011 I(6):#FFFF00 J(211):#0000FF K(25):#FF33FF L(145):#33FFFF
+voxels =
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----FFF---- ---FFFFF--- ---FFFFF--- ---FFFFF--- ---FFFFF--- ---FFFFF--- ----FFF---- ----------- ----------- 
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ---FFFFF--- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- ---FFFFF--- ----FFF---- ----------- 
+----------- ----------- ----------- ----------- ----------- ----------- ---FFFFF--- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- --FFFFFFF-- ---FFFFF--- ----FFF---- 
+----------- ----------- ----III---- ----------- ----------- ---FFFFF--- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- --FFFFFFF-- ---FFFFF--- 
+----------- ----FFF---- ---IFFFI--- ----FFF---- ---FFFFF--- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- GFFFFFFFFGG GFFFFFFFFFG -FFFFFFFFF- -FFFFFFFKF- -FFFFFFFKF- --FFFFFFF-- ---FFFFF--- 
+----------- ---FFFFF--- --IFFFFFI-- ---FFFFF--- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFJF- -FFFFFFFJF- --FFFFFFF-- ---FFFFF--- 
+----------- ---FFFFF--- --IFFFFFI-- ---FFFFF--- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFJF- -FFFFFFFLF- --FFFFFFF-- ---FFFFF--- 
+----------- ----FFF---- ---IFFFI--- ----FFF---- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFJF- -FFFFFFFLF- --FFFFFFF-- ---FFFFF--- 
+-----I----- ----I-I---- ----------- ----------- --FFFFFFF-- --FFFFFFF-- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFFF- -FFFFFFFJF- -FFFFFFFFF- --FFFFFFF-- ----FFF---- 
+----------- ----------- ----------- ----------- ---FFFFF--- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- --FFFFFFF-- ---FFFFF--- -----F----- 
+----------- ----------- ----------- ----------- ----GGG---- ---GGGGG--- --GGGGGGG-- --GGFFFGG-- --FGFFFGF-- --GFFFFFG-- --GFFFFFG-- --GFFFFFG-- --FFFFFFF-- --FFFFFFF-- ---FFFFF--- ----FFF---- ----------- 
+----------- ----------- ----------- ----------- ----GGG---- ---GGGGG--- ---GGGGG--- ---GGGGG--- ---GGGGG--- ---GHGHG--- ---GHGHG--- ---GGGGG--- ---GGFGG--- ---FFFFF--- ----FFF---- ----------- ----------- 
+
