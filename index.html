@@ -26,6 +26,7 @@
         position:  fixed;
       }
       label {
+        margin-top: 10px;
         display:  block;
       }
       main {
@@ -46,11 +47,29 @@
           {{ option }}
         </option>
       </select>
+      <label for="chain">Chain</label>
+      <select id="chain" v-model="chain" @change="chainChanged($event)">
+        <option v-for="option in chain_opts">
+          {{ option }}
+        </option>
+      </select>
     </aside>
 
     <main>
-    <a-scene id="scene" background="color: #7CE3B6" vr-mode-ui="false" embedded>
+    <a-scene id="scene" background="color: #7CE3B6" vr-mode-ui="false" embedded
+             renderer="highRefreshRate:true; logarithmicDepthBuffer:false; colorManagement: false;"
+
+             light="defaultLightsEnabled: true">
       <a-entity id="camera" camera look-controls="false"></a-entity>
+      <a-entity class="light" visible="true"
+                light="type: hemisphere;  color: #FFF; groundColor: #7BF8C8; intensity: 0.5"></a-entity>
+      <a-entity class="light" visible="true" position="-1 1 1"
+                light="type: directional; color: #FFF; intensity: 0.8;
+                       castShadow:true;  shadowBias:0.001; shadowMapWidth:2048; shadowMapHeight:2048;
+                       shadowCameraVisible:false; shadowCameraNear:0; shadowCameraFar:10;
+                       shadowCameraBottom:-1; shadowCameraLeft:-2; shadowCameraTop:2; shadowCameraRight:2;"></a-entity>
+      <a-entity class="light" visible="true" position="0 1 -1" light="type: directional; color: #FFF; intensity: 1; castShadow:false; shadowBias:0.001;"></a-entity>
+      <a-entity id="container"></a-entity>
 
 
     </a-scene>
@@ -65,13 +84,13 @@
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- -----AAA----- ----AAAAA---- ----AAAAA---- ----AAAAA---- ----AAAAA---- ----AAAAA---- -----AAA----- ------------- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- ------------- ------------- ------------- ----AAAAA---- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ----AAAAA---- -----AAA----- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- ------------- ------------- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- -----AAA----- ------------- ------------- -------------
-------------- ------------- ------------- ------------- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
------AAA----- -----AAA----- -----AAA----- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- -BAAAAAAAAAB- -BAAAAAAAAAB- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAKA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
-----AAAAA---- ----AAAAA---- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
-----AAAAA---- ----AAAAA---- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
-----AAAAA---- ----AAAAA---- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
------AAA----- -----AAA----- -----AAA----- ---AAAAAAA--- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- -----AAA----- ------------- ------------- -------------
-------------- ------------- ------------- ----AAAAA---- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ----AAAAA---- ------A------ ------------- ------------- -------------
+------------- -----CCC----- ------------- ------------- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
+-----AAA----- ----CAAAC---- -----AAA----- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- -BAAAAAAAAAB- -BAAAAAAAAAB- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAKA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
+----AAAAA---- ---CAAAAAC--- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
+----AAAAA---- ---CAAAAAC--- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
+----AAAAA---- ---CAAAAAC--- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
+-----AAA----- ----CAAAC---- -----AAA----- ---AAAAAAA--- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- -----AAA----- ------------- ------------- -------------
+-----C-C----- ------------- ------------- ----AAAAA---- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ----AAAAA---- ------A------ ------------- ------------- -------------
 ------------- ------------- ------------- -----BBB----- ----BBBBB---- ---BBBBBBB--- ---BBBBBBB--- ---ABBBBBA--- ---BBBBBBB--- ---BBBBBBB--- ---BBBBBBB--- ---AAAAAAA--- ---AAAAAAA--- ----AAAAA---- -----AAA----- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- -----BBB----- ----BBBBB---- ----BBBBB---- ----BBBBB---- ----BBBBB---- ----BKBKB---- ----BKBKB---- ----BBBBB---- ----BBABB---- ----AAAAA---- -----AAA----- ------------- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
@@ -137,12 +156,26 @@
 
       var BASE_DIM = [13, 19, 22,];
 
+      var metalColor = function(value, code) {
+        return value === 'Gold' ?
+`material lighting = flat, roughness = 0.2, metalness = 1, emissive = #FECB36 0.5
+  colors = ${code}:#FECB36` : value === 'Silver' ?
+`material lighting = flat, roughness = 0.2, metalness = 1, emissive = #BFBFBF 0.5
+  colors = ${code}:#BFBFBF` :
+`material lighting = flat, opacity = 0.0
+  colors = ${code}:#000`;
+      }
+
       var refreshModel = function(modelData) {
+
+        var chainColor = metalColor(modelData.chain, 'C');
+
         SVOX.models.MobMonkie = `
           size = 13 19 22
           scale = 0.1
           rotation = 0 0 0
           ao = 1 1
+          ${chainColor}
           material lighting = flat
             colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK}
           voxels =
@@ -153,7 +186,7 @@ ${modelData.voxels}
         if (model)
           model.parentNode.removeChild(model);
 
-        let container = document.getElementById('scene');
+        let container = document.getElementById('container');
         model = render(container, 'a-entity', {
           id: "model",
           svox: { model: "MobMonkie" },
@@ -168,7 +201,6 @@ ${modelData.voxels}
         dimension: [5, 2, 1],
         voxels: `
 BBBBB BBBBB`,
-
       }
 
       var types = {
@@ -201,6 +233,12 @@ BBBBB BBBBB`,
         Albino: {
           furColor: PALETTE.fur.albino,
         },
+      }
+
+      var chain = {
+        None: {
+          chain: 'None'
+        }
       }
 
       function parseVoxels(mask) {
@@ -268,6 +306,8 @@ BBBBB BBBBB`,
             message: 'Hello Vue!',
             types: 'Brown',
             types_opts: Object.keys(types),
+            chain: 'None',
+            chain_opts: ['None', 'Silver', 'Gold'],
           }
         },
         methods: {
@@ -278,7 +318,12 @@ BBBBB BBBBB`,
             model.furColor = t.furColor
             model.voxels = mergeVoxels(model.voxels, t.mask || normalFace);
             refreshModel(model)
-          }
+          },
+          chainChanged(event) {
+            console.log(event.target.value)
+            model.chain = event.target.value
+            refreshModel(model)
+          },
         }
       }).mount('#app')
 
