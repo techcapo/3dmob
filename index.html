@@ -54,6 +54,12 @@
           {{ option }}
         </option>
       </select>
+      <label for="earrings">Earrings</label>
+      <select id="earrings" v-model="earrings" @change="earringsChanged($event)">
+        <option v-for="option in chain_opts">
+          {{ option }}
+        </option>
+      </select>
     </aside>
 
     <main>
@@ -86,7 +92,7 @@
 ------------- ------------- ------------- ------------- ------------- ------------- ----AAAAA---- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ----AAAAA---- -----AAA----- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- ------------- ------------- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- -----AAA----- ------------- ------------- -------------
 ------------- -----CCC----- ------------- ------------- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
------AAA----- ----CAAAC---- -----AAA----- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- -BAAAAAAAAAB- -BAAAAAAAAAB- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAKA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
+-----AAA----- ----CAAAC---- -----AAA----- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- -DAAAAAAAAAD- -BAAAAAAAAAB- -BAAAAAAAAAB- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAKA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
 ----AAAAA---- ---CAAAAAC--- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
 ----AAAAA---- ---CAAAAAC--- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
 ----AAAAA---- ---CAAAAAC--- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
@@ -170,6 +176,7 @@
       var refreshModel = function(modelData) {
 
         var chainColor = metalColor(modelData.chain, 'C');
+        var earColor = metalColor(modelData.earrings, 'D');
 
         SVOX.models.MobMonkie = `
           size = 13 19 22
@@ -177,6 +184,7 @@
           rotation = 0 0 0
           ao = 1 1
           ${chainColor}
+          ${earColor}
           material lighting = flat
             colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK}
           voxels =
@@ -309,6 +317,7 @@ BBBBB BBBBB`,
             types_opts: Object.keys(types),
             chain: 'None',
             chain_opts: ['None', 'Silver', 'Gold'],
+            earrings: 'None',
           }
         },
         methods: {
@@ -323,6 +332,11 @@ BBBBB BBBBB`,
           chainChanged(event) {
             console.log(event.target.value)
             model.chain = event.target.value
+            refreshModel(model)
+          },
+          earringsChanged(event) {
+            console.log(event.target.value)
+            model.earrings = event.target.value
             refreshModel(model)
           },
         }
