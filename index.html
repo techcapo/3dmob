@@ -81,8 +81,7 @@
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
-------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
-`
+------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------`
 
       var PALETTE = {
         face: {
@@ -136,6 +135,8 @@
             return element;
       }
 
+      var BASE_DIM = [13, 19, 22,];
+
       var refreshModel = function(modelData) {
         SVOX.models.MobMonkie = `
           size = 13 19 22
@@ -163,7 +164,7 @@ ${modelData.voxels}
       }
 
       var normalFace = {
-        offset: [4, 6, 13],
+        offset: [4, 5, 13],
         dimension: [5, 2, 1],
         voxels: `
 BBBBB BBBBB`,
@@ -191,14 +192,10 @@ BBBBB BBBBB`,
           furColor: PALETTE.fur.skelly,
           faceColor: PALETTE.face.skelly,
           mask: {
-            offset: [4, 6, 11],
-            dimension: [5, 2, 3],
-            // offset: [4, 6, 13],
-            // dimension: [5, 2, 1],
+            offset: [4, 5, 13],
+            dimension: [5, 2, 1],
             voxels: `
- - -  - - -
- - -  - - -
- - -  - - -`,
+-B-B- B-B-B`,
           }
         },
         Albino: {
@@ -223,14 +220,31 @@ BBBBB BBBBB`,
           return lines
         });
         console.log(rows)
+        console.log(writeVoxels(rows))
+        return rows
+      }
+
+      function writeVoxels(voxels) {
+        return '\n' + voxels.map((row) => row.join(' ')).join('\n')
       }
 
       function mergeVoxels(base, mask) {
-        var v = parseVoxels(mask)
+        var baseVx = parseVoxels({dimension: BASE_DIM, voxels: base})
+        var mod = parseVoxels(mask)
         for (var z = 0; z < mask.dimension[2]; z++) {
+          for (var y = 0; y < mask.dimension[1]; y++) {
 
+            var org = baseVx[mask.offset[2] + z][mask.offset[1] + y];
+            console.log(org, mask.offset[2] + z, mask.offset[1] + y);
+            var replaced = org.substr(0, mask.offset[0]) + mod[z][y]
+                + org.substring(mask.offset[0]
+                + mask.dimension[0], org.length)
+            console.log(replaced);
+            baseVx[mask.offset[2] + z][mask.offset[1] + y] = replaced
+
+          }
         }
-        return base;
+        return writeVoxels(baseVx);
       }
 
       Vue.createApp({
