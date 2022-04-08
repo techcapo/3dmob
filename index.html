@@ -162,22 +162,26 @@ ${modelData.voxels}
 
       }
 
+      var normalFace = {
+        offset: [4, 6, 13],
+        dimension: [5, 2, 1],
+        voxels: `
+BBBBB BBBBB`,
+
+      }
+
       var types = {
         Brown: {
           furColor: PALETTE.fur.brown,
-          faceColor: PALETTE.face.normal,
         },
         "Light Brown": {
           furColor: PALETTE.fur.lbrown,
-          faceColor: PALETTE.face.normal,
         },
         Dark: {
           furColor: PALETTE.fur.dark,
-          faceColor: PALETTE.face.normal,
         },
         Red: {
           furColor: PALETTE.fur.red,
-          faceColor: PALETTE.face.normal,
         },
         Zombie: {
           furColor: PALETTE.fur.zombie,
@@ -186,11 +190,47 @@ ${modelData.voxels}
         Skeleton: {
           furColor: PALETTE.fur.skelly,
           faceColor: PALETTE.face.skelly,
+          mask: {
+            offset: [4, 6, 11],
+            dimension: [5, 2, 3],
+            // offset: [4, 6, 13],
+            // dimension: [5, 2, 1],
+            voxels: `
+ - -  - - -
+ - -  - - -
+ - -  - - -`,
+          }
         },
         Albino: {
           furColor: PALETTE.fur.albino,
-          faceColor: PALETTE.face.normal,
         },
+      }
+
+      function parseVoxels(mask) {
+        var rows = mask.voxels.split('\n');
+        rows.shift(); // drop first empty line
+        if (rows.length !== mask.dimension[2]) {
+          throw "error, expected " + mask.dimension[2] + " rows, got " + rows.length
+        }
+        rows = rows.map(function(row) {
+          if (mask.dimension[0] * mask.dimension[1] + (mask.dimension[1] - 1) !== row.length) {
+            throw "error, expected " + mask.dimension[0] + " x " + mask.dimension[1] + " chars, got " + row.length
+          }
+          var lines = []
+          for (var i = 0; i < row.length; i += mask.dimension[0] + 1) {
+            lines.push(row.substr(i, mask.dimension[0]))
+          }
+          return lines
+        });
+        console.log(rows)
+      }
+
+      function mergeVoxels(base, mask) {
+        var v = parseVoxels(mask)
+        for (var z = 0; z < mask.dimension[2]; z++) {
+
+        }
+        return base;
       }
 
       Vue.createApp({
@@ -205,12 +245,9 @@ ${modelData.voxels}
           typesChanged(event) {
             console.log(event.target.value)
             var t = types[event.target.value]
-            if (t.faceColor) {
-              model.faceColor = t.faceColor
-            }
-            if (t.furColor) {
-              model.furColor = t.furColor
-            }
+            model.faceColor = t.faceColor || PALETTE.face.normal
+            model.furColor = t.furColor
+            model.voxels = mergeVoxels(model.voxels, t.mask || normalFace);
             refreshModel(model)
           }
         }
