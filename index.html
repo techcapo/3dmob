@@ -195,7 +195,7 @@ BBBBB BBBBB`,
             offset: [4, 5, 13],
             dimension: [5, 2, 1],
             voxels: `
--B-B- B-B-B`,
+- - -  - - `,
           }
         },
         Albino: {
@@ -228,6 +228,21 @@ BBBBB BBBBB`,
         return '\n' + voxels.map((row) => row.join(' ')).join('\n')
       }
 
+      function addition(org, mask) {
+        if (org.length !== mask.length) {
+          throw "oh no, lengths don't match: " + org + " and " + mask;
+        }
+        var replaced = []
+        for (var i = 0; i < org.length; i++) {
+          if (mask.charAt(i) === ' ') {
+            replaced.push(org.charAt(i));
+          } else {
+            replaced.push(mask.charAt(i));
+          }
+        }
+        return replaced.join('');
+      }
+
       function mergeVoxels(base, mask) {
         var baseVx = parseVoxels({dimension: BASE_DIM, voxels: base})
         var mod = parseVoxels(mask)
@@ -236,9 +251,9 @@ BBBBB BBBBB`,
 
             var org = baseVx[mask.offset[2] + z][mask.offset[1] + y];
             console.log(org, mask.offset[2] + z, mask.offset[1] + y);
-            var replaced = org.substr(0, mask.offset[0]) + mod[z][y]
-                + org.substring(mask.offset[0]
-                + mask.dimension[0], org.length)
+            var replaced = org.substr(0, mask.offset[0])
+                + addition(org.substr(mask.offset[0], mask.dimension[0]), mod[z][y])
+                + org.substring(mask.offset[0] + mask.dimension[0], org.length)
             console.log(replaced);
             baseVx[mask.offset[2] + z][mask.offset[1] + y] = replaced
 
