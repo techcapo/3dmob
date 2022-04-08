@@ -7,6 +7,8 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="lib/smoothvoxels.1.1.0.min.js"></script>
 
+    <script src="https://unpkg.com/vue@3"></script>
+
     <script>
       const baseMonkie = `
 ----------- ----------- ----------- ----------- ----------- ----------- ----------- ----AAA---- ---AAAAA--- ---AAAAA--- ---AAAAA--- ---AAAAA--- ---AAAAA--- ----AAA---- ----------- -----------
@@ -75,21 +77,32 @@ ${baseMonkie}
     </style>
 
   </head>
-  <body>
-    <aside>foobar</aside>
+  <body id="app">
+    <aside>{{ message }}</aside>
 
     <main>
     <a-scene id="scene" background="color: #7CE3B6" vr-mode-ui="false" embedded>
+      <a-entity id="camera" camera look-controls="false"></a-entity>
 
       <a-entity
         svox="model:MobMonkie; worker:false;"
-        position="0 1.6 -2"
+        position="0 0 -2"
         animation="property:rotation; from:0 0 0; to:0 360 0; loop: true; easing:linear; dur:5000">
       </a-entity>
 
     </a-scene>
 
     </main>
+
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            message: 'Hello Vue!'
+          }
+        }
+      }).mount('#app')
+    </script>
 
 
   </body>
