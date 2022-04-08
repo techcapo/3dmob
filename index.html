@@ -8,58 +8,6 @@
     <script src="https://unpkg.com/vue@3"></script>
     <link rel="stylesheet" href="fonts/stylesheet.css" type="text/css" charset="utf-8" />
 
-    <script>
-      const baseMonkie = `
------------ ----------- ----------- ----------- ----------- ----------- ----------- ----AAA---- ---AAAAA--- ---AAAAA--- ---AAAAA--- ---AAAAA--- ---AAAAA--- ----AAA---- ----------- -----------
------------ ----------- ----------- ----------- ----------- ----------- ---AAAAA--- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- ---AAAAA--- ----AAA---- -----------
------------ ----------- ----------- ----------- ----------- ---AAAAA--- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- --AAAAAAA-- ---AAAAA--- ----AAA----
------------ ----------- ----------- ----------- ---AAAAA--- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- --AAAAAAA-- ---AAAAA---
-----AAA---- ----AAA---- ----AAA---- ---AAAAA--- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- BAAAAAAAAAB BAAAAAAAAAB -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAKA- --AAAAAAA-- ---AAAAA---
----AAAAA--- ---AAAAA--- ---AAAAA--- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- --AAAAAAA-- ---AAAAA---
----AAAAA--- ---AAAAA--- ---AAAAA--- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- --AAAAAAA-- ---AAAAA---
----AAAAA--- ---AAAAA--- ---AAAAA--- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- --AAAAAAA-- ---AAAAA---
-----AAA---- ----AAA---- ----AAA---- --AAAAAAA-- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- --AAAAAAA-- ----AAA----
------------ ----------- ----------- ---AAAAA--- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- ---AAAAA--- -----A-----
------------ ----------- ----------- ----BBB---- ---BBBBB--- --BBBBBBB-- --BBBBBBB-- --ABBBBBA-- --BBBBBBB-- --BBBBBBB-- --BBBBBBB-- --AAAAAAA-- --AAAAAAA-- ---AAAAA--- ----AAA---- -----------
------------ ----------- ----------- ----BBB---- ---BBBBB--- ---BBBBB--- ---BBBBB--- ---BBBBB--- ---BKBKB--- ---BKBKB--- ---BBBBB--- ---BBABB--- ---AAAAA--- ----AAA---- ----------- -----------
-`
-
-      var PALETTE = {
-        face: {
-          normal: '#EAAE75',
-          skelly: '#B6CAD7',
-        },
-        fur: {
-          dark: '#3B3A3A',
-          lbrown: '#825039',
-          brown: '#442623',
-          skelly: '#92A4AD',
-        },
-        clothes: {
-          blue: '#0A5EF2',
-          red: '#C83C3C',
-        },
-        shades: {
-          retro: '#12D1A0',
-        },
-      }
-
-      var faceColor = PALETTE.face.normal;
-      var furColor = PALETTE.fur.brown;
-      var BLACK = '#050505';
-
-      SVOX.models.MobMonkie = `
-        size = 11 16 12
-        scale = 0.1
-        rotation = 0 0 0
-        ao = 1 1
-        material lighting = flat
-          colors = A:${furColor} B:${faceColor} K:${BLACK}
-        voxels =
-${baseMonkie}
-      `;
-    </script>
-
     <style>
       body {
         margin: 0;
@@ -93,14 +41,10 @@ ${baseMonkie}
     <aside>
       <h1>3D Mob</h1>
       <label for="types">Types</label>
-      <select id="types" v-model="types">
-        <option>Brown</option>
-        <option>Light Brown</option>
-        <option>Dark</option>
-        <option>Red</option>
-        <option>Zombie</option>
-        <option>Skeleton</option>
-        <option>Albino</option>
+      <select id="types" v-model="types" @change="typesChanged($event)">
+        <option v-for="option in types_opts">
+          {{ option }}
+        </option>
       </select>
     </aside>
 
@@ -108,28 +52,165 @@ ${baseMonkie}
     <a-scene id="scene" background="color: #7CE3B6" vr-mode-ui="false" embedded>
       <a-entity id="camera" camera look-controls="false"></a-entity>
 
-      <a-entity
-        svox="model:MobMonkie; worker:false;"
-        position="0 0 -2"
-        animation="property:rotation; from:0 0 0; to:0 360 0; loop: true; easing:linear; dur:5000">
-      </a-entity>
 
     </a-scene>
 
     </main>
+  </body>
 
     <script>
+      const baseMonkie = `
+----------- ----------- ----------- ----------- ----------- ----------- ----------- ----AAA---- ---AAAAA--- ---AAAAA--- ---AAAAA--- ---AAAAA--- ---AAAAA--- ----AAA---- ----------- -----------
+----------- ----------- ----------- ----------- ----------- ----------- ---AAAAA--- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- ---AAAAA--- ----AAA---- -----------
+----------- ----------- ----------- ----------- ----------- ---AAAAA--- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- --AAAAAAA-- ---AAAAA--- ----AAA----
+----------- ----------- ----------- ----------- ---AAAAA--- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- --AAAAAAA-- ---AAAAA---
+----AAA---- ----AAA---- ----AAA---- ---AAAAA--- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- BAAAAAAAAAB BAAAAAAAAAB -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAKA- --AAAAAAA-- ---AAAAA---
+---AAAAA--- ---AAAAA--- ---AAAAA--- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- --AAAAAAA-- ---AAAAA---
+---AAAAA--- ---AAAAA--- ---AAAAA--- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- --AAAAAAA-- ---AAAAA---
+---AAAAA--- ---AAAAA--- ---AAAAA--- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- --AAAAAAA-- ---AAAAA---
+----AAA---- ----AAA---- ----AAA---- --AAAAAAA-- --AAAAAAA-- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- -AAAAAAAAA- --AAAAAAA-- ----AAA----
+----------- ----------- ----------- ---AAAAA--- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- --AAAAAAA-- ---AAAAA--- -----A-----
+----------- ----------- ----------- ----BBB---- ---BBBBB--- --BBBBBBB-- --BBBBBBB-- --ABBBBBA-- --BBBBBBB-- --BBBBBBB-- --BBBBBBB-- --AAAAAAA-- --AAAAAAA-- ---AAAAA--- ----AAA---- -----------
+----------- ----------- ----------- ----BBB---- ---BBBBB--- ---BBBBB--- ---BBBBB--- ---BBBBB--- ---BKBKB--- ---BKBKB--- ---BBBBB--- ---BBABB--- ---AAAAA--- ----AAA---- ----------- -----------
+`
+
+      var PALETTE = {
+        face: {
+          normal: '#EAAE75',
+          zombie: '#30B17B',
+          skelly: '#B6CAD7',
+        },
+        fur: {
+          dark: '#3B3A3A',
+          lbrown: '#825039',
+          brown: '#442623',
+          red: '#A7392C',
+          zombie: '#227A56',
+          skelly: '#92A4AD',
+          albino: '#FFF1D8',
+        },
+        clothes: {
+          blue: '#0A5EF2',
+          red: '#C83C3C',
+        },
+        shades: {
+          retro: '#12D1A0',
+        },
+      }
+
+      var faceColor = PALETTE.face.normal;
+      var furColor = PALETTE.fur.brown;
+      var BLACK = '#050505';
+
+      var model = {
+        faceColor: PALETTE.face.normal,
+        furColor: PALETTE.fur.brown,
+        voxels: baseMonkie,
+      }
+
+      function render(parent, elTag, elAttributes, elText) {
+
+          let element = document.createElement(elTag);
+
+          if (elText !== null && elText !== undefined && elText !== '') {
+            element.innerHTML += elText;
+          }
+
+          for (let attrName in elAttributes) {
+              element.setAttribute(attrName, elAttributes[attrName]);
+          };
+
+          if (parent !== undefined)
+            return parent.appendChild(element);
+          else
+            return element;
+      }
+
+
+      var refreshModel = function(modelData) {
+        SVOX.models.MobMonkie = `
+          size = 11 16 12
+          scale = 0.1
+          rotation = 0 0 0
+          ao = 1 1
+          material lighting = flat
+            colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK}
+          voxels =
+${modelData.voxels}
+        `;
+
+        let model = document.getElementById('model');
+        if (model)
+          model.parentNode.removeChild(model);
+
+        let container = document.getElementById('scene');
+        model = render(container, 'a-entity', {
+          id: "model",
+          svox: { model: "MobMonkie" },
+          position: "0 0 -2",
+          animation: "property:rotation; from:0 0 0; to:0 360 0; loop: true; easing:linear; dur:5000",
+        });
+
+      }
+
+      var types = {
+        Brown: {
+          furColor: PALETTE.fur.brown,
+          faceColor: PALETTE.face.normal,
+        },
+        "Light Brown": {
+          furColor: PALETTE.fur.lbrown,
+          faceColor: PALETTE.face.normal,
+        },
+        Dark: {
+          furColor: PALETTE.fur.dark,
+          faceColor: PALETTE.face.normal,
+        },
+        Red: {
+          furColor: PALETTE.fur.red,
+          faceColor: PALETTE.face.normal,
+        },
+        Zombie: {
+          furColor: PALETTE.fur.zombie,
+          faceColor: PALETTE.face.zombie,
+        },
+        Skeleton: {
+          furColor: PALETTE.fur.skelly,
+          faceColor: PALETTE.face.skelly,
+        },
+        Albino: {
+          furColor: PALETTE.fur.albino,
+          faceColor: PALETTE.face.normal,
+        },
+      }
+
       Vue.createApp({
         data() {
           return {
             message: 'Hello Vue!',
             types: 'Brown',
-            chain: 'None',
+            types_opts: Object.keys(types),
+          }
+        },
+        methods: {
+          typesChanged(event) {
+            console.log(event.target.value)
+            var t = types[event.target.value]
+            if (t.faceColor) {
+              model.faceColor = t.faceColor
+            }
+            if (t.furColor) {
+              model.furColor = t.furColor
+            }
+            refreshModel(model)
           }
         }
       }).mount('#app')
+
+
+      refreshModel(model);
+
+
     </script>
 
-
-  </body>
 </html>
