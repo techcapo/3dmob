@@ -2,12 +2,11 @@
 <html>
   <head>
 
-    <!-- Add the A-Frame and Smooth Voxels scripts -->
-    <!-- NOTE: Do NOT add a script tag for smoothvoxelworker.js. It will load automatically. -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="lib/smoothvoxels.1.1.0.min.js"></script>
 
     <script src="https://unpkg.com/vue@3"></script>
+    <link rel="stylesheet" href="fonts/stylesheet.css" type="text/css" charset="utf-8" />
 
     <script>
       const baseMonkie = `
@@ -62,23 +61,48 @@ ${baseMonkie}
     </script>
 
     <style>
+      body {
+        margin: 0;
+        font-family: '3d_thirteen_pixel_fontsRg', Arial, sans-serif;
+        font-size:  40px;
+      }
+      h1 {
+        font-size:  70px;
+        font-weight: normal;
+      }
       aside {
-        width:  200px;
-        height: 100%;
+        margin:  8px;
+        width:  30vw;
+        height: 100vh;
         display:  inline-block;
         position:  fixed;
       }
+      label {
+        display:  block;
+      }
       main {
-        margin-left:  200px;
-        width:  400px;
-        height: 400px;
+        margin-left: 30vw;
+        width:  70vw;
+        height: 100vh;
         padding: 0;
       }
     </style>
 
   </head>
   <body id="app">
-    <aside>{{ message }}</aside>
+    <aside>
+      <h1>3D Mob</h1>
+      <label for="types">Types</label>
+      <select id="types" v-model="types">
+        <option>Brown</option>
+        <option>Light Brown</option>
+        <option>Dark</option>
+        <option>Red</option>
+        <option>Zombie</option>
+        <option>Skeleton</option>
+        <option>Albino</option>
+      </select>
+    </aside>
 
     <main>
     <a-scene id="scene" background="color: #7CE3B6" vr-mode-ui="false" embedded>
@@ -98,7 +122,9 @@ ${baseMonkie}
       Vue.createApp({
         data() {
           return {
-            message: 'Hello Vue!'
+            message: 'Hello Vue!',
+            types: 'Brown',
+            chain: 'None',
           }
         }
       }).mount('#app')
