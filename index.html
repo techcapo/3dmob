@@ -60,6 +60,12 @@
           {{ option }}
         </option>
       </select>
+      <label for="clothing">Clothing</label>
+      <select id="clothing" v-model="clothing" @change="clothingChanged($event)">
+        <option v-for="option in clothing_opts">
+          {{ option }}
+        </option>
+      </select>
     </aside>
 
     <main>
@@ -92,11 +98,11 @@
 ------------- ------------- ------------- ------------- ------------- ------------- ----AAAAA---- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ----AAAAA---- -----AAA----- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- ------------- ------------- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- -----AAA----- ------------- ------------- -------------
 ------------- -----CCC----- ------------- ------------- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
------AAA----- ----CAAAC---- -----AAA----- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- -DAAAAAAAAAD- -BAAAAAAAAAB- -BAAAAAAAAAB- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAKA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
-----AAAAA---- ---CAAAAAC--- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
-----AAAAA---- ---CAAAAAC--- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
-----AAAAA---- ---CAAAAAC--- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
------AAA----- ----CAAAC---- -----AAA----- ---AAAAAAA--- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- -----AAA----- ------------- ------------- -------------
+-----EEE----- ----CEEEC---- -----AAA----- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- -DAAAAAAAAAD- -BAAAAAAAAAB- -BAAAAAAAAAB- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAKA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
+----EAAAE---- ---CEAAAEC--- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
+----EAAAE---- ---CEAAAEC--- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
+----EAAAE---- ---CEAAAEC--- ----AAAAA---- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- ----AAAAA---- ------------- ------------- -------------
+-----EEE----- ----CEEEC---- -----AAA----- ---AAAAAAA--- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- -----AAA----- ------------- ------------- -------------
 -----C-C----- ------------- ------------- ----AAAAA---- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ----AAAAA---- ------A------ ------------- ------------- -------------
 ------------- ------------- ------------- -----BBB----- ----BBBBB---- ---BBBBBBB--- ---BBBBBBB--- ---ABBBBBA--- ---BBBBBBB--- ---BBBBBBB--- ---BBBBBBB--- ---AAAAAAA--- ---AAAAAAA--- ----AAAAA---- -----AAA----- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- -----BBB----- ----BBBBB---- ----BBBBB---- ----BBBBB---- ----BBBBB---- ----BKBKB---- ----BKBKB---- ----BBBBB---- ----BBABB---- ----AAAAA---- -----AAA----- ------------- ------------- ------------- ------------- -------------
@@ -124,9 +130,14 @@
           skelly: '#92A4AD',
           albino: '#FFF1D8',
         },
-        clothes: {
-          blue: '#0A5EF2',
-          red: '#C83C3C',
+        clothing: {
+          'None': null,
+          'Blue Shirt': '#0A5EF2',
+          'Red Shirt': '#C83C3C',
+          'Camo Jacket': null,
+          'Purple Suit': '#824099',
+          'Black Suit': '#333333',
+          'White Suit': '#FEFFFE',
         },
         shades: {
           retro: '#12D1A0',
@@ -177,6 +188,13 @@
 
         var chainColor = metalColor(modelData.chain, 'C');
         var earColor = metalColor(modelData.earrings, 'D');
+        var clothingColor = PALETTE.clothing[modelData.clothing] || modelData.furColor;
+        if (modelData.clothing == 'None') {
+          clothingColor = modelData.furColor;
+        }
+        if (modelData.clothing == 'Camo Jacket') {
+          clothingColor = '#CAD285'; // TODO
+        }
 
         SVOX.models.MobMonkie = `
           size = 13 19 22
@@ -186,10 +204,12 @@
           ${chainColor}
           ${earColor}
           material lighting = flat
-            colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK}
+            colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK} E:${clothingColor}
           voxels =
 ${modelData.voxels}
         `;
+
+        console.log(SVOX.models.MobMonkie)
 
         let model = document.getElementById('model');
         if (model)
@@ -244,11 +264,38 @@ BBBBB BBBBB`,
         },
       }
 
-      var chain = {
+      var clothing = {
         None: {
-          chain: 'None'
-        }
-      }
+          clothingColor: PALETTE.fur.brown,
+        },
+        "Light Brown": {
+          furColor: PALETTE.fur.lbrown,
+        },
+        Dark: {
+          furColor: PALETTE.fur.dark,
+        },
+        Red: {
+          furColor: PALETTE.fur.red,
+        },
+        Zombie: {
+          furColor: PALETTE.fur.zombie,
+          faceColor: PALETTE.face.zombie,
+        },
+        Skeleton: {
+          furColor: PALETTE.fur.skelly,
+          faceColor: PALETTE.face.skelly,
+          mask: {
+            offset: [4, 5, 13],
+            dimension: [5, 2, 1],
+            voxels: `
+- - -  - - `,
+          }
+        },
+        Albino: {
+          furColor: PALETTE.fur.albino,
+        },
+      };
+
 
       function parseVoxels(mask) {
         var rows = mask.voxels.split('\n');
@@ -318,6 +365,8 @@ BBBBB BBBBB`,
             chain: 'None',
             chain_opts: ['None', 'Silver', 'Gold'],
             earrings: 'None',
+            clothing: 'None',
+            clothing_opts: Object.keys(PALETTE.clothing),
           }
         },
         methods: {
@@ -337,6 +386,11 @@ BBBBB BBBBB`,
           earringsChanged(event) {
             console.log(event.target.value)
             model.earrings = event.target.value
+            refreshModel(model)
+          },
+          clothingChanged(event) {
+            console.log(event.target.value)
+            model.clothing = event.target.value
             refreshModel(model)
           },
         }
