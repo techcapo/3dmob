@@ -148,10 +148,9 @@
       var furColor = PALETTE.fur.brown;
       var BLACK = '#050505';
 
-      var model = {
+      var modelData = {
         faceColor: PALETTE.face.normal,
         furColor: PALETTE.fur.brown,
-        voxels: baseMonkie,
       }
 
       function render(parent, elTag, elAttributes, elText) {
@@ -196,6 +195,11 @@
           clothingColor = '#CAD285'; // TODO
         }
 
+        var voxels = baseMonkie;
+        if (modelData.faceAddon) {
+          voxels = mergeVoxels(voxels, modelData.faceAddon);
+        }
+
         SVOX.models.MobMonkie = `
           size = 13 19 22
           scale = 0.1
@@ -206,7 +210,7 @@
           material lighting = flat
             colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK} E:${clothingColor}
           voxels =
-${modelData.voxels}
+${voxels}
         `;
 
         console.log(SVOX.models.MobMonkie)
@@ -225,11 +229,13 @@ ${modelData.voxels}
 
       }
 
-      var normalFace = {
-        offset: [4, 5, 13],
-        dimension: [5, 2, 1],
-        voxels: `
-BBBBB BBBBB`,
+      var ADDONS = {
+        skellyFace: {
+          offset: [4, 5, 13],
+          dimension: [5, 2, 1],
+          voxels: `
+- - -  - - `,
+        },
       }
 
       var types = {
@@ -252,50 +258,12 @@ BBBBB BBBBB`,
         Skeleton: {
           furColor: PALETTE.fur.skelly,
           faceColor: PALETTE.face.skelly,
-          mask: {
-            offset: [4, 5, 13],
-            dimension: [5, 2, 1],
-            voxels: `
-- - -  - - `,
-          }
+          addon: ADDONS.skellyFace,
         },
         Albino: {
           furColor: PALETTE.fur.albino,
         },
       }
-
-      var clothing = {
-        None: {
-          clothingColor: PALETTE.fur.brown,
-        },
-        "Light Brown": {
-          furColor: PALETTE.fur.lbrown,
-        },
-        Dark: {
-          furColor: PALETTE.fur.dark,
-        },
-        Red: {
-          furColor: PALETTE.fur.red,
-        },
-        Zombie: {
-          furColor: PALETTE.fur.zombie,
-          faceColor: PALETTE.face.zombie,
-        },
-        Skeleton: {
-          furColor: PALETTE.fur.skelly,
-          faceColor: PALETTE.face.skelly,
-          mask: {
-            offset: [4, 5, 13],
-            dimension: [5, 2, 1],
-            voxels: `
-- - -  - - `,
-          }
-        },
-        Albino: {
-          furColor: PALETTE.fur.albino,
-        },
-      };
-
 
       function parseVoxels(mask) {
         var rows = mask.voxels.split('\n');
@@ -373,31 +341,31 @@ BBBBB BBBBB`,
           typesChanged(event) {
             console.log(event.target.value)
             var t = types[event.target.value]
-            model.faceColor = t.faceColor || PALETTE.face.normal
-            model.furColor = t.furColor
-            model.voxels = mergeVoxels(model.voxels, t.mask || normalFace);
-            refreshModel(model)
+            modelData.faceColor = t.faceColor || PALETTE.face.normal
+            modelData.furColor = t.furColor
+            modelData.faceAddon = t.addon
+            refreshModel(modelData)
           },
           chainChanged(event) {
             console.log(event.target.value)
-            model.chain = event.target.value
-            refreshModel(model)
+            modelData.chain = event.target.value
+            refreshModel(modelData)
           },
           earringsChanged(event) {
             console.log(event.target.value)
-            model.earrings = event.target.value
-            refreshModel(model)
+            modelData.earrings = event.target.value
+            refreshModel(modelData)
           },
           clothingChanged(event) {
             console.log(event.target.value)
-            model.clothing = event.target.value
-            refreshModel(model)
+            modelData.clothing = event.target.value
+            refreshModel(modelData)
           },
         }
       }).mount('#app')
 
 
-      refreshModel(model);
+      refreshModel(modelData);
 
 
     </script>
