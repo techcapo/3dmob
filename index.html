@@ -66,6 +66,12 @@
           {{ option }}
         </option>
       </select>
+      <label for="shades">Shades</label>
+      <select id="shades" v-model="shades" @change="shadesChanged($event)">
+        <option v-for="option in shades_opts">
+          {{ option }}
+        </option>
+      </select>
     </aside>
 
     <main>
@@ -132,6 +138,20 @@ F   E G   F
 G   F F   E
  FGE   EFG `,
         },
+        shade: {
+          offset: [1, 8, 6],
+          dimension: [11, 3, 9],
+          voxels: `
+                        H         H
+                        H         H
+                        H         H
+                        H         H
+                        H         H
+                         H       H.
+                         H       H.
+    B B                  H       H.
+              III III    HIIIHIIIH.`,
+        },
       }
 
       var BLACK = '#050505';
@@ -163,6 +183,8 @@ G   F F   E
           'White Suit': '#FEFFFE',
         },
         shades: {
+          purple: '#633076',
+          blue: '#0D7493',
           retro: '#12D1A0',
         },
       }
@@ -210,10 +232,12 @@ G   F F   E
         var chainColor = metalColor(modelData.chain, 'C');
         var earColor = metalColor(modelData.earrings, 'D');
         var clothingColor = PALETTE.clothing[modelData.clothing] || modelData.furColor;
+        var lensColor = modelData.lensColor || BLACK;
 
         var voxels = baseMonkie;
         voxels = mergeVoxels(voxels, modelData.faceAddon);
         voxels = mergeVoxels(voxels, modelData.clothingAddon);
+        voxels = mergeVoxels(voxels, modelData.shadesAddon);
 
         SVOX.models.MobMonkie = `
           size = 13 19 22
@@ -222,6 +246,10 @@ G   F F   E
           ao = 1 1
           ${chainColor}
           ${earColor}
+          material lighting = flat, roughness = 0.2, metalness = 1
+            colors = H:${BLACK}
+          material lighting = flat, roughness = 0.2, metalness = 1, emissive = ${lensColor} 0.5
+            colors = I:${lensColor}
           material lighting = flat
             colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK} E:${clothingColor} F:${CAMO2} G:${CAMO3}
           voxels =
@@ -244,7 +272,7 @@ ${voxels}
 
       }
 
-      var types = {
+      var TYPES = {
         Brown: {
           furColor: PALETTE.fur.brown,
         },
@@ -268,6 +296,39 @@ ${voxels}
         },
         Albino: {
           furColor: PALETTE.fur.albino,
+        },
+      }
+
+      var SHADES = {
+        None: {
+        },
+        Black: {
+          addon: ADDONS.shade,
+          lensColor: BLACK,
+        },
+        Purple: {
+          addon: ADDONS.shade,
+          lensColor: PALETTE.shades.purple,
+        },
+        Blue: {
+          addon: ADDONS.shade,
+          lensColor: PALETTE.shades.blue,
+        },
+        Retro: {
+          addon: ADDONS.retro,
+          lensColor: PALETTE.shades.retro,
+        },
+        'Blue Laser': {
+          addon: ADDONS.laser,
+          lensColor: PALETTE.shades.bluelaser,
+        },
+        'Red Laser': {
+          addon: ADDONS.laser,
+          lensColor: PALETTE.shades.redlaser,
+        },
+        'Green Laser': {
+          addon: ADDONS.laser,
+          lensColor: PALETTE.shades.greenlaser,
         },
       }
 
@@ -338,18 +399,20 @@ ${voxels}
           return {
             message: 'Hello Vue!',
             types: 'Brown',
-            types_opts: Object.keys(types),
+            types_opts: Object.keys(TYPES),
             chain: 'None',
             chain_opts: ['None', 'Silver', 'Gold'],
             earrings: 'None',
             clothing: 'None',
             clothing_opts: Object.keys(PALETTE.clothing),
+            shades: 'None',
+            shades_opts: Object.keys(SHADES),
           }
         },
         methods: {
           typesChanged(event) {
             console.log(event.target.value)
-            var t = types[event.target.value]
+            var t = TYPES[event.target.value]
             modelData.faceColor = t.faceColor || PALETTE.face.normal
             modelData.furColor = t.furColor
             modelData.faceAddon = t.addon
@@ -371,6 +434,13 @@ ${voxels}
             modelData.clothingAddon = modelData.clothing === 'Camo Jacket' ? ADDONS.camoJacket : null;
             refreshModel(modelData)
           },
+          shadesChanged(event) {
+            console.log(event.target.value)
+            var t = SHADES[event.target.value]
+            modelData.lensColor = t.lensColor || BLACK;
+            modelData.shadesAddon = t.addon;
+            refreshModel(modelData)
+          }
         }
       }).mount('#app')
 
