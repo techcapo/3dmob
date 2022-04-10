@@ -78,6 +78,12 @@
           {{ option }}
         </option>
       </select>
+      <label for="smoking">Smoking</label>
+      <select id="smoking" v-model="smoking" @change="smokingChanged($event)">
+        <option v-for="option in smoking_opts">
+          {{ option }}
+        </option>
+      </select>
     </aside>
 
     <main>
@@ -181,12 +187,24 @@ G   F F   E
   H     H     I     I     H     H..
    HHHHH       IIIII       HHHHH...`,
         },
+        vape: {
+          offset: [7, 5, 14],
+          dimension: [1, 11, 6],
+          voxels: `
+J . . . . . . . . . .
+J . . . . . . . . . .
+J . . . . . . . . . .
+J . . . . . . . . . .
+L . . . . . . . . . .
+. . N . N N . N N N N`,
+        },
       }
 
       var BLACK = '#050505';
       var CAMO2 = '#054E12';
       var CAMO3 = '#40321E';
       var LASER_FRAME = '#4B4945';
+      var SMOKE = '#6E6971';
 
       var PALETTE = {
         face: {
@@ -219,6 +237,15 @@ G   F F   E
           bluelaser: '#38C4ED',
           redlaser: '#EC2025',
           greenlaser: '#87C540',
+        },
+        smoking: {
+          vape1: '#585752',
+          vape2: '#0C66F0',
+          cigarette1: '#BF5D1E',
+          cigarette2: '#D1D0D0',
+          pipe: '#6F422A',
+          cigar1: '#764934',
+          cigar2: '#C43C17',
         },
       }
 
@@ -270,12 +297,18 @@ G   F F   E
         var clothingColor = PALETTE.clothing[modelData.clothing] || modelData.furColor;
         var lensColor = modelData.lensColor || BLACK;
         var frameColor = modelData.frameColor || BLACK;
-        var lensEmission = modelData.lensEmission || 0.5
+        var lensEmission = modelData.lensEmission || 0.5;
+
+        var smoking1Color = modelData.smoking1Color || BLACK;
+        var smoking2Color = modelData.smoking2Color || BLACK;
+        var smokingEmission = modelData.smokingEmission || 0.0;
+
 
         var voxels = baseMonkie;
         voxels = mergeVoxels(voxels, modelData.faceAddon);
         voxels = mergeVoxels(voxels, modelData.clothingAddon);
         voxels = mergeVoxels(voxels, modelData.shadesAddon);
+        voxels = mergeVoxels(voxels, modelData.smokingAddon);
 
         SVOX.models.MobMonkie = `
           size = 13 19 22
@@ -287,11 +320,14 @@ G   F F   E
           ${grillColor}
           material lighting = flat, roughness = 0.2, metalness = 1, emissive = ${frameColor} 0.5
             colors = H:${frameColor}
-          }
           material lighting = flat, roughness = 0.2, metalness = 1, emissive = ${lensColor} ${lensEmission}
             colors = I:${lensColor}
+          material lighting = flat, emissive = ${smoking2Color} ${smokingEmission}
+            colors = L:${smoking2Color}
+          material lighting = flat,  emissive = ${SMOKE} 0.5, deform = 0.2 1, scatter = 0.1
+            colors = N:${SMOKE}
           material lighting = flat
-            colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK} E:${clothingColor} F:${CAMO2} G:${CAMO3}
+            colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK} E:${clothingColor} F:${CAMO2} G:${CAMO3} J:${smoking1Color}
           voxels =
 ${voxels}
         `;
@@ -378,6 +414,31 @@ ${voxels}
         },
       }
 
+      var SMOKING = {
+        None: {},
+        Vape: {
+          smoking1Color: PALETTE.smoking.vape1,
+          smoking2Color: PALETTE.smoking.vape2,
+          smokingEmission: 1,
+          addon: ADDONS.vape,
+        },
+        Cigarette: {
+          smoking1Color: PALETTE.smoking.cigarette1,
+          smoking2Color: PALETTE.smoking.cigarette2,
+          addon: ADDONS.cigarette,
+        },
+        Pipe: {
+          smoking1Color: PALETTE.smoking.pipe,
+          addon: ADDONS.pipe,
+        },
+        Cigar: {
+          smoking1Color: PALETTE.smoking.cigar1,
+          smoking2Color: PALETTE.smoking.cigar2,
+          smokingEmission: 1,
+          addon: ADDONS.cigar,
+        },
+      }
+
       function parseVoxels(mask) {
         var rows = mask.voxels.replaceAll('.', ' ').split('\n');
         rows.shift(); // drop first empty line
@@ -454,6 +515,8 @@ ${voxels}
             shades: 'None',
             shades_opts: Object.keys(SHADES),
             grill: 'None',
+            smoking: 'None',
+            smoking_opts: Object.keys(SMOKING),
           }
         },
         methods: {
@@ -493,6 +556,15 @@ ${voxels}
           grillChanged(event) {
             console.log(event.target.value)
             modelData.grill = event.target.value;
+            refreshModel(modelData)
+          },
+          smokingChanged(event) {
+            console.log(event.target.value)
+            var t = SMOKING[event.target.value]
+            modelData.smoking1Color = t.smoking1Color;
+            modelData.smoking2Color = t.smoking2Color;
+            modelData.smokingEmission = t.smokingEmission;
+            modelData.smokingAddon = t.addon;
             refreshModel(modelData)
           },
         }
