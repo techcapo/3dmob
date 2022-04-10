@@ -166,11 +166,21 @@ G   F F   E
     B B       I     I     I     I..
                IIIII       IIIII...`,
         },
+        laser: {
+          offset: [1, 8, 11],
+          dimension: [11, 3, 4],
+          voxels: `
+ H       H   H       H   H       H.
+ H       H   H       H   H       H.
+  H     H     I     I     H     H..
+   HHHHH       IIIII       HHHHH...`,
+        },
       }
 
       var BLACK = '#050505';
       var CAMO2 = '#054E12';
       var CAMO3 = '#40321E';
+      var LASER_FRAME = '#4B4945';
 
       var PALETTE = {
         face: {
@@ -200,6 +210,9 @@ G   F F   E
           purple: '#633076',
           blue: '#0D7493',
           retro: '#12D1A0',
+          bluelaser: '#38C4ED',
+          redlaser: '#EC2025',
+          greenlaser: '#87C540',
         },
       }
 
@@ -247,6 +260,8 @@ G   F F   E
         var earColor = metalColor(modelData.earrings, 'D');
         var clothingColor = PALETTE.clothing[modelData.clothing] || modelData.furColor;
         var lensColor = modelData.lensColor || BLACK;
+        var frameColor = modelData.frameColor || BLACK;
+        var lensEmission = modelData.lensEmission || 0.5
 
         var voxels = baseMonkie;
         voxels = mergeVoxels(voxels, modelData.faceAddon);
@@ -260,9 +275,10 @@ G   F F   E
           ao = 1 1
           ${chainColor}
           ${earColor}
-          material lighting = flat, roughness = 0.2, metalness = 1
-            colors = H:${BLACK}
-          material lighting = flat, roughness = 0.2, metalness = 1, emissive = ${lensColor} 0.5
+          material lighting = flat, roughness = 0.2, metalness = 1, emissive = ${frameColor} 0.5
+            colors = H:${frameColor}
+          }
+          material lighting = flat, roughness = 0.2, metalness = 1, emissive = ${lensColor} ${lensEmission}
             colors = I:${lensColor}
           material lighting = flat
             colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK} E:${clothingColor} F:${CAMO2} G:${CAMO3}
@@ -335,14 +351,20 @@ ${voxels}
         'Blue Laser': {
           addon: ADDONS.laser,
           lensColor: PALETTE.shades.bluelaser,
+          lensEmission: 1,
+          frameColor: LASER_FRAME,
         },
         'Red Laser': {
           addon: ADDONS.laser,
           lensColor: PALETTE.shades.redlaser,
+          lensEmission: 1,
+          frameColor: LASER_FRAME,
         },
         'Green Laser': {
           addon: ADDONS.laser,
           lensColor: PALETTE.shades.greenlaser,
+          lensEmission: 1,
+          frameColor: LASER_FRAME,
         },
       }
 
@@ -451,7 +473,9 @@ ${voxels}
           shadesChanged(event) {
             console.log(event.target.value)
             var t = SHADES[event.target.value]
-            modelData.lensColor = t.lensColor || BLACK;
+            modelData.lensColor = t.lensColor;
+            modelData.lensEmission = t.lensEmission;
+            modelData.frameColor = t.frameColor;
             modelData.shadesAddon = t.addon;
             refreshModel(modelData)
           }
