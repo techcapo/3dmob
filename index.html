@@ -60,6 +60,12 @@
           {{ option }}
         </option>
       </select>
+      <label for="grill">Grill</label>
+      <select id="grill" v-model="grill" @change="grillChanged($event)">
+        <option v-for="option in chain_opts">
+          {{ option }}
+        </option>
+      </select>
       <label for="clothing">Clothing</label>
       <select id="clothing" v-model="clothing" @change="clothingChanged($event)">
         <option v-for="option in clothing_opts">
@@ -111,7 +117,7 @@
 -----EEE----- ----CEEEC---- -----AAA----- ---AAAAAAA--- ---AAAAAAA--- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- --AAAAAAAAA-- ---AAAAAAA--- -----AAA----- ------------- ------------- -------------
 -----C-C----- ------------- ------------- ----AAAAA---- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ---AAAAAAA--- ----AAAAA---- ------A------ ------------- ------------- -------------
 ------------- ------------- ------------- -----BBB----- ----BBBBB---- ---BBBBBBB--- ---BBBBBBB--- ---ABBBBBA--- ---BBBBBBB--- ---BBBBBBB--- ---BBBBBBB--- ---AAAAAAA--- ---AAAAAAA--- ----AAAAA---- -----AAA----- ------------- ------------- ------------- -------------
-------------- ------------- ------------- -----BBB----- ----BBBBB---- ----BBBBB---- ----BBBBB---- ----BBBBB---- ----BKBKB---- ----BKBKB---- ----BBBBB---- ----BBABB---- ----AAAAA---- -----AAA----- ------------- ------------- ------------- ------------- -------------
+------------- ------------- ------------- -----BBB----- ----BBBBB---- ----BMMBB---- ----BBBBB---- ----BBBBB---- ----BKBKB---- ----BKBKB---- ----BBBBB---- ----BBABB---- ----AAAAA---- -----AAA----- ------------- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
@@ -126,7 +132,7 @@
           offset: [4, 5, 13],
           dimension: [5, 2, 1],
           voxels: `
-- - -  - - `,
+-B-B- B-B-B`,
         },
         camoJacket: {
           offset: [4, 0, 6],
@@ -244,12 +250,14 @@ G   F F   E
 
       var BASE_DIM = [13, 19, 22,];
 
-      var metalColor = function(value, code) {
+      var metalColor = function(value, code, noneColor) {
         return value === 'Gold' ?
 `material lighting = flat, roughness = 0.2, metalness = 1, emissive = #FECB36 0.5
   colors = ${code}:#FECB36` : value === 'Silver' ?
 `material lighting = flat, roughness = 0.2, metalness = 1, emissive = #BFBFBF 0.5
-  colors = ${code}:#BFBFBF` :
+  colors = ${code}:#BFBFBF` : noneColor ?
+`material lighting = flat
+  colors = ${code}:${noneColor}`:
 `material lighting = flat, opacity = 0.0
   colors = ${code}:#000`;
       }
@@ -258,6 +266,7 @@ G   F F   E
 
         var chainColor = metalColor(modelData.chain, 'C');
         var earColor = metalColor(modelData.earrings, 'D');
+        var grillColor = metalColor(modelData.grill, 'M', modelData.faceColor);
         var clothingColor = PALETTE.clothing[modelData.clothing] || modelData.furColor;
         var lensColor = modelData.lensColor || BLACK;
         var frameColor = modelData.frameColor || BLACK;
@@ -275,6 +284,7 @@ G   F F   E
           ao = 1 1
           ${chainColor}
           ${earColor}
+          ${grillColor}
           material lighting = flat, roughness = 0.2, metalness = 1, emissive = ${frameColor} 0.5
             colors = H:${frameColor}
           }
@@ -443,6 +453,7 @@ ${voxels}
             clothing_opts: Object.keys(PALETTE.clothing),
             shades: 'None',
             shades_opts: Object.keys(SHADES),
+            grill: 'None',
           }
         },
         methods: {
@@ -478,7 +489,12 @@ ${voxels}
             modelData.frameColor = t.frameColor;
             modelData.shadesAddon = t.addon;
             refreshModel(modelData)
-          }
+          },
+          grillChanged(event) {
+            console.log(event.target.value)
+            modelData.grill = event.target.value;
+            refreshModel(modelData)
+          },
         }
       }).mount('#app')
 
