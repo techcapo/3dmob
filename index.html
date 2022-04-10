@@ -115,6 +115,29 @@
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------
 ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- ------------- -------------`
 
+      var ADDONS = {
+        skellyFace: {
+          offset: [4, 5, 13],
+          dimension: [5, 2, 1],
+          voxels: `
+- - -  - - `,
+        },
+        camoJacket: {
+          offset: [4, 0, 6],
+          dimension: [5, 2, 5],
+          voxels: `
+ EFG   FGE.
+E   F F   G
+F   E G   F
+G   F F   E
+ FGE   EFG `,
+        },
+      }
+
+      var BLACK = '#050505';
+      var CAMO2 = '#054E12';
+      var CAMO3 = '#40321E';
+
       var PALETTE = {
         face: {
           normal: '#EAAE75',
@@ -134,7 +157,7 @@
           'None': null,
           'Blue Shirt': '#0A5EF2',
           'Red Shirt': '#C83C3C',
-          'Camo Jacket': null,
+          'Camo Jacket': '#A8AF70',
           'Purple Suit': '#824099',
           'Black Suit': '#333333',
           'White Suit': '#FEFFFE',
@@ -146,7 +169,6 @@
 
       var faceColor = PALETTE.face.normal;
       var furColor = PALETTE.fur.brown;
-      var BLACK = '#050505';
 
       var modelData = {
         faceColor: PALETTE.face.normal,
@@ -188,17 +210,10 @@
         var chainColor = metalColor(modelData.chain, 'C');
         var earColor = metalColor(modelData.earrings, 'D');
         var clothingColor = PALETTE.clothing[modelData.clothing] || modelData.furColor;
-        if (modelData.clothing == 'None') {
-          clothingColor = modelData.furColor;
-        }
-        if (modelData.clothing == 'Camo Jacket') {
-          clothingColor = '#CAD285'; // TODO
-        }
 
         var voxels = baseMonkie;
-        if (modelData.faceAddon) {
-          voxels = mergeVoxels(voxels, modelData.faceAddon);
-        }
+        voxels = mergeVoxels(voxels, modelData.faceAddon);
+        voxels = mergeVoxels(voxels, modelData.clothingAddon);
 
         SVOX.models.MobMonkie = `
           size = 13 19 22
@@ -208,7 +223,7 @@
           ${chainColor}
           ${earColor}
           material lighting = flat
-            colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK} E:${clothingColor}
+            colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK} E:${clothingColor} F:${CAMO2} G:${CAMO3}
           voxels =
 ${voxels}
         `;
@@ -227,15 +242,6 @@ ${voxels}
           animation: "property:rotation; from:0 0 0; to:0 360 0; loop: true; easing:linear; dur:5000",
         });
 
-      }
-
-      var ADDONS = {
-        skellyFace: {
-          offset: [4, 5, 13],
-          dimension: [5, 2, 1],
-          voxels: `
-- - -  - - `,
-        },
       }
 
       var types = {
@@ -266,7 +272,7 @@ ${voxels}
       }
 
       function parseVoxels(mask) {
-        var rows = mask.voxels.split('\n');
+        var rows = mask.voxels.replaceAll('.', ' ').split('\n');
         rows.shift(); // drop first empty line
         if (rows.length !== mask.dimension[2]) {
           throw "error, expected " + mask.dimension[2] + " rows, got " + rows.length
@@ -306,6 +312,9 @@ ${voxels}
       }
 
       function mergeVoxels(base, mask) {
+        if (!mask) {
+          return base;
+        }
         var baseVx = parseVoxels({dimension: BASE_DIM, voxels: base})
         var mod = parseVoxels(mask)
         for (var z = 0; z < mask.dimension[2]; z++) {
@@ -359,6 +368,7 @@ ${voxels}
           clothingChanged(event) {
             console.log(event.target.value)
             modelData.clothing = event.target.value
+            modelData.clothingAddon = modelData.clothing === 'Camo Jacket' ? ADDONS.camoJacket : null;
             refreshModel(modelData)
           },
         }
