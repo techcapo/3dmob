@@ -51,6 +51,12 @@
           {{ option }}
         </option>
       </select>
+      <label for="hats">Hats</label>
+      <select id="hats" v-model="hats" @change="hatsChanged($event)">
+        <option v-for="option in hats_opts">
+          {{ option }}
+        </option>
+      </select>
       <label for="chain">Chain</label>
       <select id="chain" v-model="chain" @change="chainChanged($event)">
         <option v-for="option in chain_opts">
@@ -240,9 +246,31 @@ L . . . . . . . . . .
  .   .   .   .   .   N   N   .  NNN NNN  N.
  .   .   .   .   .   .   .   .   N   N    .`,
         },
-      }
+        fedora: {
+          offset: [0, 13, 0],
+          dimension: [13, 5, 16],
+          voxels: `
+----OOOOO---- ------------- ------------- ------------- -------------
+---OOOOOOO--- ------------- ------------- ------------- -------------
+--OOO   OOO-- -----PPP----- -----OOO----- -----OOO----- ------O------
+-OOO     OOO- ----P   P---- ----O   O---- ----OOOOO---- ----OOOOO----
+OOO       OOO ---P     P--- ---O     O--- ---OOOOOOO--- ---OO---OO---
+OO         OO --P       P-- --O       O-- --OOOOOOOOO-- ---O-OOO-O---
+OO         OO --P       P-- --O       O-- --OOOOOOOOO-- ---O-OOO-O---
+OO         OO --P       P-- --O       O-- --OOOOOOOOO-- ---O-OOO-O---
+OO         OO --P       P-- --O       O-- --OOOOOOOOO-- ---O-OOO-O---
+OO         OO --P       P-- --O       O-- --OOOOOOOOO-- ---OO-O-OO---
+OO         OO --P       P-- --O       O-- ---OOOOOOO--- ----OO-OO----
+OOO       OOO ---P     P--- ---O     O--- ----OOOOO---- -----OOO-----
+-OOO     OOO- ----P   P---- ----O   O---- -----OOO----- ------O------
+--OOO   OOO-- -----PPP----- -----OOO----- ------O------ -------------
+---OOOOOOO--- ------------- ------------- ------------- -------------
+----OOOOO---- ------------- ------------- ------------- -------------`,
+        },
+      };
 
       var BLACK = '#050505';
+      var CAMO1 = '#A8AF70';
       var CAMO2 = '#054E12';
       var CAMO3 = '#40321E';
       var LASER_FRAME = '#4B4945';
@@ -267,7 +295,7 @@ L . . . . . . . . . .
           'None': null,
           'Blue Shirt': '#0A5EF2',
           'Red Shirt': '#C83C3C',
-          'Camo Jacket': '#A8AF70',
+          'Camo Jacket': CAMO1,
           'Purple Suit': '#824099',
           'Black Suit': '#333333',
           'White Suit': '#FEFFFE',
@@ -289,6 +317,19 @@ L . . . . . . . . . .
           cigar1: '#764934',
           cigar2: '#C43C17',
         },
+        hats: {
+          orange: ['#DC5726', '#A44323'],
+          black: ['#333333', '#1B1C1C'],
+          blackCap: ['#333333', '#333333', '#333333'],
+          redCap: ['#CA3C3A', '#CA3C3A', '#CA3C3A'],
+          blueCap: ['#3F65AE', '#3F65AE', '#3F65AE'],
+          camoCap: [CAMO1, CAMO2, CAMO3],
+          solanaCap: ['#6EC6AA', '#5DC7D6', '#C476B0'],
+          blackFedora: ['#333333', '#FEFEFE'],
+          purpleFedora: ['#824099', '#F3B93A'],
+          whiteFedora: ['#E2E2E3', '#F3B93A'],
+          boater: ['#EBC175', '#FEFEFE'],
+        }
       }
 
       var faceColor = PALETTE.face.normal;
@@ -345,12 +386,18 @@ L . . . . . . . . . .
         var smoking2Color = modelData.smoking2Color || BLACK;
         var smokingEmission = modelData.smokingEmission || 0.0;
 
+        var hatsColor = modelData.hatsColor || [];
+        var hats1Color = hatsColor[0] || BLACK;
+        var hats2Color = hatsColor[1] || BLACK;
+        var hats3Color = hatsColor[2] || BLACK;
+        var hats4Color = hatsColor[3] || BLACK;
 
         var voxels = baseMonkie;
         voxels = mergeVoxels(voxels, modelData.faceAddon);
         voxels = mergeVoxels(voxels, modelData.clothingAddon);
         voxels = mergeVoxels(voxels, modelData.shadesAddon);
         voxels = mergeVoxels(voxels, modelData.smokingAddon);
+        voxels = mergeVoxels(voxels, modelData.hatsAddon);
 
         SVOX.models.MobMonkie = `
           size = 13 19 22
@@ -370,6 +417,8 @@ L . . . . . . . . . .
             colors = N:${SMOKE}
           material lighting = flat
             colors = A:${modelData.furColor} B:${modelData.faceColor} K:${BLACK} E:${clothingColor} F:${CAMO2} G:${CAMO3} J:${smoking1Color}
+          material lighting = flat
+            colors = O:${hats1Color} P:${hats2Color} Q:${hats3Color} R:${hats4Color}
           voxels =
 ${voxels}
         `;
@@ -481,6 +530,74 @@ ${voxels}
         },
       }
 
+      var HATS = {
+        None: {},
+        'Orange Beanie': {
+          color: PALETTE.hats.orange,
+          addon: ADDONS.beanie,
+        },
+        'Black Beanie': {
+          color: PALETTE.hats.black,
+          addon: ADDONS.beanie,
+        },
+        'Black Cap': {
+          color: PALETTE.hats.blackCap,
+          addon: ADDONS.cap,
+        },
+        'Black Cap Backwards': {
+          color: PALETTE.hats.blackCap,
+          addon: ADDONS.capBackwards,
+        },
+        'Red Cap': {
+          color: PALETTE.hats.redCap,
+          addon: ADDONS.cap,
+        },
+        'Red Cap Backwards': {
+          color: PALETTE.hats.redCap,
+          addon: ADDONS.capBackwards,
+        },
+        'Blue Cap': {
+          color: PALETTE.hats.blueCap,
+          addon: ADDONS.cap,
+        },
+        'Blue Cap Backwards': {
+          color: PALETTE.hats.blueCap,
+          addon: ADDONS.capBackwards,
+        },
+        'Camo Cap': {
+          color: PALETTE.hats.camo,
+          addon: ADDONS.cap,
+        },
+        'Camo Cap Backwards': {
+          color: PALETTE.hats.camo,
+          addon: ADDONS.capBackwards,
+        },
+        'Solana Cap': {
+          color: PALETTE.hats.solana,
+          addon: ADDONS.solanaCap,
+        },
+        'Solana Cap Backwards': {
+          color: PALETTE.hats.solana,
+          addon: ADDONS.solanaCapBackwards,
+        },
+        'White Fedora': {
+          color: PALETTE.hats.whiteFedora,
+          addon: ADDONS.fedora,
+        },
+        'Purple Fedora': {
+          color: PALETTE.hats.purpleFedora,
+          addon: ADDONS.fedora,
+        },
+        'Black Fedora': {
+          color: PALETTE.hats.blackFedora,
+          addon: ADDONS.fedora,
+        },
+        'Boater': {
+          color: PALETTE.hats.boater,
+          addon: ADDONS.fedora,
+        },
+      }
+
       function parseVoxels(mask) {
         var rows = mask.voxels.replaceAll('.', ' ').split('\n');
         rows.shift(); // drop first empty line
@@ -559,6 +676,8 @@ ${voxels}
             grill: 'None',
             smoking: 'None',
             smoking_opts: Object.keys(SMOKING),
+            hats: 'None',
+            hats_opts: Object.keys(HATS),
           }
         },
         methods: {
@@ -607,6 +726,13 @@ ${voxels}
             modelData.smoking2Color = t.smoking2Color;
             modelData.smokingEmission = t.smokingEmission;
             modelData.smokingAddon = t.addon;
+            refreshModel(modelData)
+          },
+          hatsChanged(event) {
+            console.log(event.target.value)
+            var t = HATS[event.target.value]
+            modelData.hatsColor = t.color;
+            modelData.hatsAddon = t.addon;
             refreshModel(modelData)
           },
         }
