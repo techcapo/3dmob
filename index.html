@@ -93,6 +93,12 @@
           {{ option }}
         </option>
       </select>
+      <label for="background">Background</label>
+      <select id="background" v-model="background" @change="backgroundChanged($event)">
+        <option v-for="option in background_opts">
+          {{ option }}
+        </option>
+      </select>
     </aside>
 
     <main>
@@ -433,6 +439,14 @@ P       P P       P -P     P- --P   P-- ---PPP---
           purpleFedora: ['#824099', '#F3B93A'],
           whiteFedora: ['#E2E2E3', '#F3B93A'],
           boater: ['#EBC175', '#FEFEFE'],
+        },
+        backgrounds: {
+          'Pale Green': '#7CE3B6',
+          'Blue': '#7AD2E2',
+          'Pink': '#F68C99',
+          'Orchid': '#A7A4E5',
+          'Lime': '#B2EA8B',
+          'Yellow': '#FEFE9C',
         }
       }
 
@@ -540,6 +554,11 @@ ${voxels}
           position: "0 0 -2",
           animation: "property:rotation; from:0 0 0; to:0 360 0; loop: true; easing:linear; dur:5000",
         });
+
+        if (modelData.backgroundColor) {
+          let scene = document.getElementById('scene');
+          scene.setAttribute('background', 'color: ' + modelData.backgroundColor)
+        }
 
       }
 
@@ -782,6 +801,8 @@ ${voxels}
             smoking_opts: Object.keys(SMOKING),
             hats: 'None',
             hats_opts: Object.keys(HATS),
+            background: 'Pale Green',
+            background_opts: Object.keys(PALETTE.backgrounds),
           }
         },
         methods: {
@@ -837,6 +858,12 @@ ${voxels}
             var t = HATS[event.target.value]
             modelData.hatsColor = t.color;
             modelData.hatsAddon = t.addon;
+            refreshModel(modelData)
+          },
+          backgroundChanged(event) {
+            console.log(event.target.value)
+            var t = PALETTE.backgrounds[event.target.value]
+            modelData.backgroundColor = t;
             refreshModel(modelData)
           },
         }
