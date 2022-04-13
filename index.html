@@ -439,8 +439,8 @@ P       P P       P -P     P- --P   P-- ---PPP---
           orange: ['#A44323', '#DC5726'],
           black: ['#1B1C1C', '#333333'],
           blackCap: ['#333333', '#333333', '#333333'],
-          redCap: ['#CA3C3A', '#CA3C3A', '#CA3C3A'],
-          blueCap: ['#3F65AE', '#3F65AE', '#3F65AE'],
+          redCap: ['#C83D3C', '#C83D3C', '#C83D3C'],
+          blueCap: ['#0B5EF4', '#0B5EF4', '#0B5EF4'],
           camo: [CAMO1, CAMO2, CAMO3],
           solana: ['#00FEC2', '#01E8EC', '#FA67FF'],
           blackFedora: ['#333333', '#FEFEFE'],
@@ -488,9 +488,9 @@ P       P P       P -P     P- --P   P-- ---PPP---
 
       var metalColor = function(value, code, noneColor) {
         return value === 'Gold' ?
-`material lighting = flat, roughness = 0, metalness = 1, emissive = #FECB36 0.5
+`material lighting = flat, roughness = 0.2, metalness = 1, emissive = #FECB36 0.5
   colors = ${code}:#FECB36` : value === 'Silver' ?
-`material lighting = flat, roughness = 0.2, metalness = 1, emissive = #BFBFBF 0.8
+`material lighting = flat, roughness = 0.2, metalness = 1, emissive = #BFBFBF 0.5
   colors = ${code}:#BFBFBF` : noneColor ?
 `material lighting = flat
   colors = ${code}:${noneColor}`:
