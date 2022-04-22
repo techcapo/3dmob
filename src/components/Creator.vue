@@ -55,6 +55,7 @@ aside {
 label {
   margin-top: 10px;
   display:  block;
+  text-transform: capitalize;
 }
 footer {
   font-size: 20px;
