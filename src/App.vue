@@ -79,7 +79,7 @@ import attributes from './attributes.js'
         var hats3Color = hatsColor[2] || PALETTE.BLACK;
         var hats4Color = hatsColor[3] || PALETTE.BLACK;
 
-        var voxels = baseMonkette;
+        var voxels = modelData.gender === 'Monkie' ? baseMonkie : baseMonkette;
         voxels = mergeVoxels(voxels, modelData.hair.addon);
         voxels = mergeVoxels(voxels, modelData.clothingAddon);
         voxels = mergeVoxels(voxels, modelData.shades.addon);

@@ -162,6 +162,7 @@ var HATS = {
 
 export default {
   defaults: {
+    gender: 'Monkie',
     types: 'Brown',
     chain: 'None',
     earrings: 'None',
@@ -173,6 +174,7 @@ export default {
     background: 'Pale Green',
   },
   opts: {
+    gender: ['Monkie', 'Monkette'],
     types: Object.keys(TYPES),
     chain: ['None', 'Silver', 'Gold'],
     earrings: ['None', 'Silver', 'Gold'],
@@ -185,6 +187,7 @@ export default {
   },
   createModel(attrs) {
     var modelData = {}
+    modelData.gender = attrs.gender
     modelData.background = attrs.background
     modelData.hair = TYPES[attrs.types]
     modelData.shades = SHADES[attrs.shades]
