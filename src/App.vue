@@ -10,6 +10,7 @@ import Viewer from '@/components/Viewer.vue'
 <script>
 
 import baseMonkie from './assets/monkie.svox?raw'
+import baseMonkette from './assets/monkette.svox?raw'
 import ADDONS from './addons.js'
 import PALETTE from './palette.js'
 import attributes from './attributes.js'
@@ -78,7 +79,7 @@ import attributes from './attributes.js'
         var hats3Color = hatsColor[2] || PALETTE.BLACK;
         var hats4Color = hatsColor[3] || PALETTE.BLACK;
 
-        var voxels = baseMonkie;
+        var voxels = baseMonkette;
         voxels = mergeVoxels(voxels, modelData.hair.addon);
         voxels = mergeVoxels(voxels, modelData.clothingAddon);
         voxels = mergeVoxels(voxels, modelData.shades.addon);

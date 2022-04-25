@@ -36,9 +36,9 @@ var PALETTE = {
     'White Suit': '#FEFFFE',
   },
   shades: {
-    purple: '#633076',
-    blue: '#0D7493',
-    retro: '#12D1A0',
+    purple: '#76398E',
+    blue: '#048DB2',
+    retro: '#03FFC2',
     bluelaser: '#38C4ED',
     redlaser: '#EC2025',
     greenlaser: '#87C540',

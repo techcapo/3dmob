@@ -40,8 +40,8 @@ G   F F   E
                         I         I
                         I         I
              I       I   I       I.
-    B B       I     I     I     I..
-               IIIII       IIIII...`,
+    B B      -I     I-   -I     I-.
+              -IIIII-    --IIIII--.`,
         },
         laser: {
           offset: [1, 8, 12],
@@ -49,8 +49,8 @@ G   F F   E
           voxels: `
  H       H   H       H   H       H.
  H       H   H       H   H       H.
-  H     H     I     I     H     H..
-   HHHHH       IIIII       HHHHH...`,
+ -H     H-   -I     I-   -H     H-.
+ --HHHHH--   --IIIII--   --HHHHH--.`,
         },
         vape: {
           offset: [7, 5, 14],
