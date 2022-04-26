@@ -105,11 +105,12 @@ var PALETTE = {
   },
   earrings: {
     'None': null,
-    'Gold': GOLD,
-    'Silver': SILVER,
+    'Gold': null,
+    'Silver': null,
     'Blue Topaz': '#64BFDE',
     'Amethyst': '#8F68AC',
     'Emerald': '#5DBD76',
+    'Hoops': null,
     'Diamond': '#BFE6F4',
   },
 }

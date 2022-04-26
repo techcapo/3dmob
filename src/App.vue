@@ -43,16 +43,25 @@ import attributes from './attributes.js'
 
       var BASE_DIM = [13, 19, 23,];
 
-      var metalColor = function(value, code, noneColor) {
+      var metalColor = function(value, code, noneColor, bling) {
         return value === 'Gold' ?
-`material lighting = flat, roughness = 0.2, metalness = 1, emissive = #FECB36 0.5
-  colors = ${code}:#FECB36` : value === 'Silver' ?
-`material lighting = flat, roughness = 0.2, metalness = 1, emissive = #BFBFBF 0.5
-  colors = ${code}:#BFBFBF` : noneColor ?
+`material lighting = flat, roughness = 0.0, metalness = 1, emissive = ${PALETTE.GOLD} 0.5
+  colors = ${code}:${PALETTE.GOLD}` : value === 'Silver' ?
+`material lighting = flat, roughness = 0.0, metalness = 1, emissive = #BFBFBF 0.5
+  colors = ${code}:#BFBFBF` : bling ?
+`material lighting = flat, roughness = 0.0, emissive = ${noneColor} 1.0, opacity = 1
+  colors = ${code}:${noneColor}`: noneColor ?
 `material lighting = flat
   colors = ${code}:${noneColor}`:
 `material lighting = flat, opacity = 0.0
   colors = ${code}:#000`;
+      }
+
+      var earringColor = function(earrings) {
+        var base = metalColor(earrings.base, 'D')
+        var dangle = metalColor(earrings.dangle, 'S', earrings.dangle, earrings.bling)
+        var hoops = metalColor(earrings.hoops, 'T')
+        return [base, dangle, hoops].join('\n');
       }
 
       var refreshModel = function(modelData) {
@@ -62,7 +71,7 @@ import attributes from './attributes.js'
         var faceColor = modelData.hair.faceColor || PALETTE.face.normal
 
         var chainColor = metalColor(modelData.chain, 'C');
-        var earColor = metalColor(modelData.earrings, 'D');
+        var earColor = earringColor(modelData.earrings);
         var mouthColor = metalColor(modelData.mouth, 'M', modelData.mouthColor || faceColor);
         var clothingColor = PALETTE.clothing[modelData.clothing] || furColor;
         var lensColor = modelData.shades.lensColor || PALETTE.BLACK;

@@ -202,6 +202,45 @@ var HATS = {
   },
 }
 
+var EARRINGS = {
+  'None': {},
+  'Gold': {
+    base: 'Gold',
+  },
+  'Silver': {
+    base: 'Silver',
+  },
+  'Gold Bar': {
+    base: 'Gold',
+    dangle: 'Gold',
+  },
+  'Blue Topaz': {
+    base: 'Gold',
+    dangle: PALETTE.earrings['Blue Topaz'],
+    bling: true,
+  },
+  'Amethyst': {
+    base: 'Gold',
+    dangle: PALETTE.earrings['Amethyst'],
+    bling: true,
+  },
+  'Emerald': {
+    base: 'Gold',
+    dangle: PALETTE.earrings['Emerald'],
+    bling: true,
+  },
+  'Hoops': {
+    base: 'Gold',
+    hoops: 'Gold',
+  },
+  'Diamond': {
+    base: 'Gold',
+    dangle: PALETTE.earrings['Diamond'],
+    bling: true,
+  },
+}
+
+
 export default {
   defaults: {
     gender: 'Monkie',
@@ -219,7 +258,7 @@ export default {
     gender: ['Monkie', 'Monkette'],
     types: Object.keys(TYPES),
     chain: ['None', 'Silver', 'Gold'],
-    earrings: ['None', 'Silver', 'Gold'],
+    earrings: Object.keys(EARRINGS),
     mouth: Object.keys(PALETTE.mouth),
     clothing: Object.keys(PALETTE.clothing),
     shades: Object.keys(SHADES),
@@ -237,7 +276,7 @@ export default {
     modelData.hats = HATS[attrs.hats]
 
     modelData.chain = attrs.chain
-    modelData.earrings = attrs.earrings
+    modelData.earrings = EARRINGS[attrs.earrings]
     modelData.mouth = attrs.mouth
     modelData.mouthColor = PALETTE.mouth[attrs.mouth]
     modelData.clothing = attrs.clothing
