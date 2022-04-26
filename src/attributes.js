@@ -14,6 +14,12 @@ var TYPES = {
   Red: {
     furColor: PALETTE.fur.red,
   },
+  Purple: {
+    furColor: PALETTE.fur.purple,
+  },
+  Pink: {
+    furColor: PALETTE.fur.pink,
+  },
   Zombie: {
     furColor: PALETTE.fur.zombie,
     faceColor: PALETTE.face.zombie,
@@ -42,6 +48,10 @@ var SHADES = {
   Blue: {
     addon: ADDONS.shade,
     lensColor: PALETTE.shades.blue,
+  },
+  Pink: {
+    addon: ADDONS.shade,
+    lensColor: PALETTE.shades.pink,
   },
   Retro: {
     addon: ADDONS.retro,
@@ -102,6 +112,10 @@ var HATS = {
     color: PALETTE.hats.black,
     addon: ADDONS.beanie,
   },
+  'Pink Beanie': {
+    color: PALETTE.hats.pink,
+    addon: ADDONS.beanie,
+  },
   'Black Cap': {
     color: PALETTE.hats.blackCap,
     addon: ADDONS.cap,
@@ -126,6 +140,30 @@ var HATS = {
     color: PALETTE.hats.blueCap,
     addon: ADDONS.capBackwards,
   },
+  'Cyan Cap': {
+    color: PALETTE.hats.cyanCap,
+    addon: ADDONS.cap,
+  },
+  'Cyan Cap Backwards': {
+    color: PALETTE.hats.cyanCap,
+    addon: ADDONS.capBackwards,
+  },
+  'Yellow Cap': {
+    color: PALETTE.hats.yellowCap,
+    addon: ADDONS.cap,
+  },
+  'Yellow Cap Backwards': {
+    color: PALETTE.hats.yellowCap,
+    addon: ADDONS.capBackwards,
+  },
+  'Green Cap': {
+    color: PALETTE.hats.greenCap,
+    addon: ADDONS.cap,
+  },
+  'Green Cap Backwards': {
+    color: PALETTE.hats.greenCap,
+    addon: ADDONS.capBackwards,
+  },
   'Camo Cap': {
     color: PALETTE.hats.camo,
     addon: ADDONS.cap,
@@ -148,6 +186,10 @@ var HATS = {
   },
   'Purple Fedora': {
     color: PALETTE.hats.purpleFedora,
+    addon: ADDONS.fedora,
+  },
+  'Pink Fedora': {
+    color: PALETTE.hats.pinkFedora,
     addon: ADDONS.fedora,
   },
   'Black Fedora': {
