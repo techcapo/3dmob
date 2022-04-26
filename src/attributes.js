@@ -208,7 +208,7 @@ export default {
     types: 'Brown',
     chain: 'None',
     earrings: 'None',
-    grill: 'None',
+    mouth: 'None',
     clothing: 'None',
     shades: 'None',
     smoking: 'None',
@@ -220,7 +220,7 @@ export default {
     types: Object.keys(TYPES),
     chain: ['None', 'Silver', 'Gold'],
     earrings: ['None', 'Silver', 'Gold'],
-    grill: ['None', 'Silver', 'Gold'],
+    mouth: Object.keys(PALETTE.mouth),
     clothing: Object.keys(PALETTE.clothing),
     shades: Object.keys(SHADES),
     smoking: Object.keys(SMOKING),
@@ -238,7 +238,8 @@ export default {
 
     modelData.chain = attrs.chain
     modelData.earrings = attrs.earrings
-    modelData.grill = attrs.grill
+    modelData.mouth = attrs.mouth
+    modelData.mouthColor = PALETTE.mouth[attrs.mouth]
     modelData.clothing = attrs.clothing
     modelData.clothingAddon = modelData.clothing === 'Camo Jacket' ? ADDONS.camoJacket : null;
 

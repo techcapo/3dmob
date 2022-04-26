@@ -93,8 +93,8 @@ var PALETTE = {
   },
   mouth: {
     'None': null,
-    'Gold Grill': GOLD,
-    'Silver Grill': SILVER,
+    'Gold': GOLD,
+    'Silver': SILVER,
     'Bubblegum': '#E56B8A',
     'Red': '#9C1C1E',
     'Esmeralda': '#76428B',

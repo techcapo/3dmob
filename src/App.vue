@@ -63,7 +63,7 @@ import attributes from './attributes.js'
 
         var chainColor = metalColor(modelData.chain, 'C');
         var earColor = metalColor(modelData.earrings, 'D');
-        var grillColor = metalColor(modelData.grill, 'M', faceColor);
+        var mouthColor = metalColor(modelData.mouth, 'M', modelData.mouthColor || faceColor);
         var clothingColor = PALETTE.clothing[modelData.clothing] || furColor;
         var lensColor = modelData.shades.lensColor || PALETTE.BLACK;
         var frameColor = modelData.shades.frameColor || PALETTE.BLACK;
@@ -93,7 +93,7 @@ import attributes from './attributes.js'
           ao = 1 1
           ${chainColor}
           ${earColor}
-          ${grillColor}
+          ${mouthColor}
           material lighting = flat, roughness = 0.2, metalness = 1, emissive = ${frameColor} 0.5
             colors = H:${frameColor}
           material lighting = flat, roughness = 0.2, metalness = 0.5, emissive = ${lensColor} ${lensEmission}
