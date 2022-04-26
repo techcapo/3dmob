@@ -43,11 +43,17 @@ import attributes from './attributes.js'
 
       var BASE_DIM = [13, 19, 23,];
 
+// `material lighting = flat, roughness = 0.0, metalness = 1, emissive = ${PALETTE.GOLD} 0.5
+//   colors = ${code}:${PALETTE.GOLD}` : value === 'Silver' ?
+// `material lighting = flat, roughness = 0.0, metalness = 1, emissive = #BFBFBF 0.5
+//   colors = ${code}:#BFBFBF` : bling ?
+
+
       var metalColor = function(value, code, noneColor, bling) {
         return value === 'Gold' ?
-`material lighting = flat, roughness = 0.0, metalness = 1, emissive = ${PALETTE.GOLD} 0.5
+`material lighting = flat, roughness = 0.2
   colors = ${code}:${PALETTE.GOLD}` : value === 'Silver' ?
-`material lighting = flat, roughness = 0.0, metalness = 1, emissive = #BFBFBF 0.5
+`material lighting = flat, roughness = 0.2
   colors = ${code}:#BFBFBF` : bling ?
 `material lighting = flat, roughness = 0.0, emissive = ${noneColor} 1.0, opacity = 1
   colors = ${code}:${noneColor}`: noneColor ?
