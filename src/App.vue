@@ -41,7 +41,7 @@ import attributes from './attributes.js'
             return element;
       }
 
-      var BASE_DIM = [13, 19, 23,];
+      var BASE_DIM = [15, 19, 23,];
 
 // `material lighting = flat, roughness = 0.0, metalness = 1, emissive = ${PALETTE.GOLD} 0.5
 //   colors = ${code}:${PALETTE.GOLD}` : value === 'Silver' ?
@@ -102,7 +102,7 @@ import attributes from './attributes.js'
         voxels = mergeVoxels(voxels, modelData.hats.addon);
 
         SVOX.models.MobMonkie = `
-          size = 13 19 23
+          size = ${BASE_DIM[0]}  ${BASE_DIM[1]}  ${BASE_DIM[2]}
           scale = 0.1
           rotation = 0 0 0
           ao = 1 1

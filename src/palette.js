@@ -88,8 +88,8 @@ var PALETTE = {
     purpleFedora: ['#824099', '#F3B93A'],
     pinkFedora: ['#E46B88', '#F9BE35'],
     whiteFedora: ['#E2E2E3', '#F3B93A'],
-
     boater: ['#EBC175', '#FEFEFE'],
+    panama: ['#ECC299', '#663A32', '#C0C0C0', '#AD3232'],
   },
   backgrounds: {
     'Pale Green': '#7CE3B6',

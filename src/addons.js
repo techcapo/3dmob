@@ -1,12 +1,12 @@
 export default {
         skellyFace: {
-          offset: [4, 5, 14],
+          offset: [5, 5, 14],
           dimension: [5, 2, 1],
           voxels: `
 -B-B- B-B-B`,
         },
         camoJacket: {
-          offset: [4, 0, 7],
+          offset: [5, 0, 7],
           dimension: [5, 2, 5],
           voxels: `
  EFG   FGE.
@@ -16,7 +16,7 @@ G   F F   E
  FGE   EFG `,
         },
         camoJackette: {
-          offset: [4, 0, 7],
+          offset: [5, 0, 7],
           dimension: [5, 2, 6],
           voxels: `
  EFG   FGE.
@@ -27,7 +27,7 @@ E   F F   F
 FE EG      `,
         },
         solanaJacket: {
-          offset: [4, 0, 7],
+          offset: [5, 0, 7],
           dimension: [5, 2, 5],
           voxels: `
  VVV   VVV.
@@ -37,7 +37,7 @@ E   E E   E
  EEE       `,
         },
         solanaJackette: {
-          offset: [4, 0, 7],
+          offset: [5, 0, 7],
           dimension: [5, 2, 6],
           voxels: `
  VVV   VVV.
@@ -48,7 +48,7 @@ E   E E   E
 EE EE      `,
         },
         shade: {
-          offset: [1, 8, 7],
+          offset: [2, 8, 7],
           dimension: [11, 3, 9],
           voxels: `
                         H         H
@@ -62,7 +62,7 @@ EE EE      `,
               III III    HIIIHIIIH.`,
         },
         retro: {
-          offset: [1, 8, 7],
+          offset: [2, 8, 7],
           dimension: [11, 3, 9],
           voxels: `
                         I         I
@@ -76,7 +76,7 @@ EE EE      `,
               -IIIII-    --IIIII--.`,
         },
         laser: {
-          offset: [1, 8, 12],
+          offset: [2, 8, 12],
           dimension: [11, 3, 4],
           voxels: `
  H       H   H       H   H       H.
@@ -85,7 +85,7 @@ EE EE      `,
  --HHHHH--   --IIIII--   --HHHHH--.`,
         },
         vape: {
-          offset: [7, 5, 14],
+          offset: [8, 5, 14],
           dimension: [1, 11, 7],
           voxels: `
 J . . . . . . . . . .
@@ -97,7 +97,7 @@ L . . . . . . . . . .
 . . N . N N . N N N N`,
         },
         cigarette: {
-          offset: [7, 5, 14],
+          offset: [8, 5, 14],
           dimension: [1, 11, 7],
           voxels: `
 J . . . . . . . . . .
@@ -109,7 +109,7 @@ L . . . . . . . . . .
 . . N . N N . N N N N`,
         },
         cigar: {
-          offset: [7, 5, 14],
+          offset: [8, 5, 14],
           dimension: [1, 11, 7],
           voxels: `
 J . . . . . . . . . .
@@ -121,7 +121,7 @@ L . . . . . . . . . .
 . . N . N N . N N N N`,
         },
         pipe: {
-          offset: [6, 5, 14],
+          offset: [7, 5, 14],
           dimension: [3, 11, 9],
           voxels: `
  J   .   .   .   .   .   .   .   .   .   ..
@@ -135,7 +135,7 @@ L . . . . . . . . . .
  .   .   .   .   .   .   .   .   N   N    .`,
         },
         fedora: {
-          offset: [0, 13, 1],
+          offset: [1, 13, 1],
           dimension: [13, 5, 16],
           voxels: `
 ----OOOOO---- ------------- ------------- ------------- -------------
@@ -155,8 +155,31 @@ OOO       OOO ---P     P--- ---O     O--- ----OOOOO---- -----OOO-----
 ---OOOOOOO--- ------------- ------------- ------------- -------------
 ----OOOOO---- ------------- ------------- ------------- -------------`,
         },
+        panama: {
+          offset: [0, 13, 0],
+          dimension: [15, 5, 18],
+          voxels: `
+-----OOOOO----- --------------- --------------- --------------- ---------------
+----OOOOOOO---- --------------- --------------- --------------- ---------------
+---OOOOOOOOO--- --------------- --------------- --------------- ---------------
+--OOOO   OOOO-- ------PPP------ ------OOO------ --------------- ---------------
+-OOOO     OOOO- -----P   P----- -----O   O----- ------OOO------ ---------------
+-OOO       OOO- ----P     P---- ----O     O---- -----OOOOO----- ------OOO------
+OOO         OOO ---P       P--- ---O       O--- ----OOOOOOO---- -----OOOOO-----
+OOO         OOO ---Q       P--- ---O       O--- ----ROOOOOO---- -----OOOOO-----
+OOO         OOO ---Q       P--- ---R       O--- ----OOOOOOO---- -----OOOOO-----
+OOO         OOO ---P       P--- ---O       O--- ----OOOOOOO---- -----OOOOO-----
+OOO         OOO ---P       P--- ---O       O--- ----OOOOOOO---- -----OOOOO-----
+OOO         OOO ---P       P--- ---O       O--- ----OOOOOOO---- -----OOOOO-----
+-OOO       OOO- ----P     P---- ----O     O---- -----OOOOO----- ------OOO------
+-OOOO     OOOO- -----P   P----- -----O   O----- ------OOO------ ---------------
+--OOOO   OOOO-- ------PPP------ ------OOO------ --------------- ---------------
+---OOOOOOOOO--- --------------- --------------- --------------- ---------------
+----OOOOOOO---- --------------- --------------- --------------- ---------------
+-----OOOOO----- --------------- --------------- --------------- ---------------`,
+        },
         boater: {
-          offset: [0, 13, 1],
+          offset: [1, 13, 1],
           dimension: [13, 4, 16],
           voxels: `
 ----OOOOO---- ------------- ------------- -------------
@@ -177,7 +200,7 @@ OOO       OOO ---P     P--- ---O     O--- ---OOOOOOO---
 ----OOOOO---- ------------- ------------- -------------`,
         },
         beanie: {
-          offset: [1, 12, 2],
+          offset: [2, 12, 2],
           dimension: [11, 5, 14],
           voxels: `
 ---OOOOO--- ---OOOOO--- ----------- ----------- -----------
@@ -196,7 +219,7 @@ O         O O         O -P       P- --P     P-- ---PPPPP---
 ---OOOOO--- ---OOOOO--- ----------- ----------- -----------`,
         },
         cap: {
-          offset: [2, 12, 3],
+          offset: [3, 12, 3],
           dimension: [9, 5, 16],
           voxels: `
 --OQPOP-- --QOOPO-- ---PQP--- --------- ---------
@@ -217,7 +240,7 @@ PQOQOPOQP --------- --------- --------- ---------
 ---OPQ--- --------- --------- --------- ---------`,
         },
         capBackwards: {
-          offset: [2, 12, 0],
+          offset: [3, 12, 0],
           dimension: [9, 5, 16],
           voxels: `
    QPO                                          .
@@ -238,7 +261,7 @@ P       P Q       Q -P     P- --O   P-- ---QOO---
           --------- --------- --------- ---------`,
         },
         solanaCap: {
-          offset: [2, 12, 3],
+          offset: [3, 12, 3],
           dimension: [9, 5, 16],
           voxels: `
 --QQQQQ-- --QQQQQ-- ---QQQ--- --------- ---------
@@ -259,7 +282,7 @@ OOOOOOOOO --------- --------- --------- ---------
 ---OOO--- --------- --------- --------- ---------`,
         },
         solanaCapBackwards: {
-          offset: [2, 12, 0],
+          offset: [3, 12, 0],
           dimension: [9, 5, 16],
           voxels: `
    OOO                                          .
