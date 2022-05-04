@@ -26,6 +26,27 @@ G   F E   E
 E   F F   F
 FE EG      `,
         },
+        solanaJacket: {
+          offset: [4, 0, 7],
+          dimension: [5, 2, 5],
+          voxels: `
+ VVV   VVV.
+V   V V   V
+U   U U   U
+E   E E   E
+ EEE       `,
+        },
+        solanaJackette: {
+          offset: [4, 0, 7],
+          dimension: [5, 2, 6],
+          voxels: `
+ VVV   VVV.
+V   V V   V
+U   U U   U
+U   U U   U
+E   E E   E
+EE EE      `,
+        },
         shade: {
           offset: [1, 8, 7],
           dimension: [11, 3, 9],

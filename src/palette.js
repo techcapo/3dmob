@@ -7,6 +7,10 @@ var SMOKE = '#6E6971';
 var GOLD = '#FFCD39';
 var SILVER = '#BFBFBF';
 
+var SOLANA1 = '#00FEC2'
+var SOLANA2 = '#01E8EC'
+var SOLANA3 = '#FA67FF'
+
 var PALETTE = {
   BLACK: BLACK,
   CAMO1: CAMO1,
@@ -16,6 +20,9 @@ var PALETTE = {
   SMOKE: SMOKE,
   GOLD: GOLD,
   SILVER: SILVER,
+  SOLANA1: SOLANA1,
+  SOLANA2: SOLANA2,
+  SOLANA3: SOLANA3,
   face: {
     normal: '#EAAE75',
     zombie: '#30B17B',
@@ -45,6 +52,7 @@ var PALETTE = {
     'Purple Suit': '#824099',
     'Black Suit': '#333333',
     'White Suit': '#FEFFFE',
+    'Solana Jacket': SOLANA1,
   },
   shades: {
     purple: '#76398E',
@@ -75,7 +83,7 @@ var PALETTE = {
     greenCap: ['#82C774', '#82C774', '#82C774'],
     yellowCap: ['#F8F298', '#F8F298', '#F8F298'],
     camo: [CAMO1, CAMO2, CAMO3],
-    solana: ['#00FEC2', '#01E8EC', '#FA67FF'],
+    solana: [SOLANA1, SOLANA2, SOLANA3],
     blackFedora: ['#333333', '#FEFEFE'],
     purpleFedora: ['#824099', '#F3B93A'],
     pinkFedora: ['#E46B88', '#F9BE35'],

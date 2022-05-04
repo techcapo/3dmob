@@ -118,7 +118,7 @@ import attributes from './attributes.js'
           material lighting = flat,  emissive = ${PALETTE.SMOKE} 0.5, deform = 0.2 1, scatter = 0.1
             colors = N:${PALETTE.SMOKE}
           material lighting = flat
-            colors = A:${furColor} B:${faceColor} K:${PALETTE.BLACK} E:${clothingColor} F:${PALETTE.CAMO2} G:${PALETTE.CAMO3} J:${smoking1Color}
+            colors = A:${furColor} B:${faceColor} K:${PALETTE.BLACK} E:${clothingColor} F:${PALETTE.CAMO2} G:${PALETTE.CAMO3} J:${smoking1Color} U:${PALETTE.SOLANA2} V:${PALETTE.SOLANA3}
           material lighting = flat
             colors = O:${hats1Color} P:${hats2Color} Q:${hats3Color} R:${hats4Color}
           voxels =

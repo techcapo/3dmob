@@ -281,7 +281,9 @@ export default {
     modelData.mouthColor = PALETTE.mouth[attrs.mouth]
     modelData.clothing = attrs.clothing
     modelData.clothingAddon = modelData.clothing === 'Camo Jacket' ?
-        modelData.gender === 'Monkette' ? ADDONS.camoJackette : ADDONS.camoJacket : null;
+        modelData.gender === 'Monkette' ? ADDONS.camoJackette : ADDONS.camoJacket :
+        modelData.clothing === 'Solana Jacket' ?
+        modelData.gender === 'Monkette' ? ADDONS.solanaJackette : ADDONS.solanaJacket : null;
 
     return modelData
   }
