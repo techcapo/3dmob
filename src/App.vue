@@ -103,7 +103,7 @@ import attributes from './attributes.js'
 
         SVOX.models.MobMonkie = `
           size = ${BASE_DIM[0]}  ${BASE_DIM[1]}  ${BASE_DIM[2]}
-          scale = 0.1
+          scale = 0.07
           rotation = 0 0 0
           ao = 1 1
           ${chainColor}
