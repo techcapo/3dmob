@@ -90,6 +90,7 @@ var PALETTE = {
     whiteFedora: ['#E2E2E3', '#F3B93A'],
     boater: ['#EBC175', '#FEFEFE'],
     panama: ['#ECC299', '#663A32', '#C0C0C0', '#AD3232'],
+    solanama: [SOLANA1, SOLANA3, '#C0C0C0', SOLANA2],
   },
   backgrounds: {
     'Pale Green': '#7CE3B6',

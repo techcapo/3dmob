@@ -204,6 +204,10 @@ var HATS = {
     color: PALETTE.hats.panama,
     addon: ADDONS.panama,
   },
+  'Solana Panama Hat': {
+    color: PALETTE.hats.solanama,
+    addon: ADDONS.solanama,
+  },
 }
 
 var EARRINGS = {
