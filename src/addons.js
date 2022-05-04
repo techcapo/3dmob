@@ -15,6 +15,17 @@ F   E G   F
 G   F F   E
  FGE   EFG `,
         },
+        camoJackette: {
+          offset: [4, 0, 7],
+          dimension: [5, 2, 6],
+          voxels: `
+ EFG   FGE.
+E   F F   G
+F   E G   F
+G   F E   E
+E   F F   F
+FE EG      `,
+        },
         shade: {
           offset: [1, 8, 7],
           dimension: [11, 3, 9],
