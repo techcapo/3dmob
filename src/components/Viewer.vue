@@ -17,10 +17,7 @@
                      shadowCameraBottom:-1; shadowCameraLeft:-2; shadowCameraTop:2; shadowCameraRight:2;"></a-entity>
     <a-entity class="light" visible="true" position="0 1 -1" light="type: directional; color: #FFF; intensity: 1; castShadow:false; shadowBias:0.001;"></a-entity>
     <a-entity id="container"></a-entity>
-
-
   </a-scene>
-
   </main>
 </template>
 
@@ -31,4 +28,5 @@ main {
   height: 100vh;
   padding: 0;
 }
+
 </style>
