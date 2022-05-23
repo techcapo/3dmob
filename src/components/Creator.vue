@@ -16,6 +16,7 @@ export default {
     return {
       attributes: attributes,
       sending: false,
+      success: false,
     };
   },
   methods: {
@@ -25,6 +26,15 @@ export default {
     propose() {
 
       this.sending = true;
+
+      setTimeout(() => {
+        this.sending = false;
+        this.success = false;
+      }, 3000);
+
+      setTimeout(() => {
+        this.success = true;
+      }, 1000);
 
       var script = document.createElement('script');
       var d = this.attributes.defaults
@@ -52,7 +62,7 @@ export default {
         </option>
       </select>
     </div>
-    <button @click=propose>Propose</button>
+    <button @click=propose :disabled="sending">{{success ? "Mob Tiez!" : "Propose"}}</button>
     <footer>
       Copyright 2022 Tech Capo. {{ msg }}
     </footer>
