@@ -8,9 +8,26 @@ defineProps({
 </script>
 
 <script>
+
+import * as THREE from 'three';
+import GLTFExporter from 'three-gltf-exporter';
+var exporter = new GLTFExporter();
+
 import PALETTE from '../PALETTE.js';
 import attributes from '../attributes.js';
 //import store from '../store.js';
+
+function downloadJSON(exportObj, exportName){
+  var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+  var downloadAnchorNode = document.createElement('a');
+  downloadAnchorNode.setAttribute("href",     dataStr);
+  downloadAnchorNode.setAttribute("download", exportName);
+  document.body.appendChild(downloadAnchorNode); // required for firefox
+  downloadAnchorNode.click();
+  downloadAnchorNode.remove();
+}
+
+
 export default {
   data() {
     return {
@@ -46,6 +63,25 @@ export default {
 
 //      console.log(JSON.stringify(this.defaults));
     },
+    exportModel() {
+      let container = document.getElementById('container');
+      var options = {
+        // animation: 'property:rotation; from:0 0 0; to:0 360 0; loop: true; easing:linear; dur:5000',
+      };
+      console.log('exporting');
+      exporter.parse(
+        container.object3D,
+        // called when the gltf has been generated
+        function ( gltf ) {
+          console.log( gltf );
+          downloadJSON(gltf, "monkie.glb");
+        },
+        function ( error ) {
+          console.log( 'An error happened' );
+        },
+        options
+      );
+    }
   }
 }
 
@@ -63,6 +99,7 @@ export default {
       </select>
     </div>
     <button @click=propose :disabled="sending">{{success ? "Mob Tiez!" : "Propose"}}</button>
+    <button @click="exportModel">Export</button>
     <footer>
       Copyright 2022 Tech Capo. {{ msg }}
     </footer>
