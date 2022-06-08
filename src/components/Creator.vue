@@ -126,6 +126,7 @@ button {
   font-family: '3d_thirteen_pixel_fontsRg', Arial, sans-serif;
   font-size:  60px;
   margin-top: 20px;
+  margin-right: 5px;
 }
 footer {
   font-size: 20px;
