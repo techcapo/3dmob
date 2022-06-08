@@ -43,18 +43,18 @@ import attributes from './attributes.js'
 
       var BASE_DIM = [15, 19, 23,];
 
-// `material lighting = flat, roughness = 0.0, metalness = 1, emissive = ${PALETTE.GOLD} 0.5
-//   colors = ${code}:${PALETTE.GOLD}` : value === 'Silver' ?
-// `material lighting = flat, roughness = 0.0, metalness = 1, emissive = #BFBFBF 0.5
-//   colors = ${code}:#BFBFBF` : bling ?
 
 
       var metalColor = function(value, code, noneColor, bling) {
         return value === 'Gold' ?
-`material lighting = flat, roughness = 0.2
+`material lighting = flat, roughness = 0.0, metalness = 1, emissive = ${PALETTE.GOLD} 0.5
   colors = ${code}:${PALETTE.GOLD}` : value === 'Silver' ?
-`material lighting = flat, roughness = 0.2
+`material lighting = flat, roughness = 0.0, metalness = 1, emissive = #BFBFBF 0.5
   colors = ${code}:#BFBFBF` : bling ?
+// `material lighting = flat, roughness = 0.2
+//   colors = ${code}:${PALETTE.GOLD}` : value === 'Silver' ?
+// `material lighting = flat, roughness = 0.2
+//   colors = ${code}:#BFBFBF` : bling ?
 `material lighting = flat, roughness = 0.0, emissive = ${noneColor} 1.0, opacity = 1
   colors = ${code}:${noneColor}`: noneColor ?
 `material lighting = flat
@@ -135,18 +135,64 @@ ${voxels}
         model = render(container, 'a-entity', {
           id: "model",
           svox: { model: "MobMonkie" },
-          position: "0 0 -2",
-          animation: "property:rotation; from:0 0 0; to:0 360 0; loop: true; easing:linear; dur:5000",
+          // position: "0 0 -2",
+          // animation: "property:rotation; from:0 0 0; to:0 360 0; loop: true; easing:linear; dur:5000",
         });
+
+        var rx = 35;
+        var ry = 0;
+        var rz = 45;
+
+        var tetra = render(container, 'a-tetrahedron', {
+          color: '#FF926B',
+          radius: '.8',
+          position: "0 -0.26 0",
+          roughness: 0.1,
+          rotation: `${rx} ${ry} ${rz}`,
+        });
+
+        requestAnimationFrame(function(){
+          var box = new THREE.Box3().setFromObject(model.object3D);
+          model.object3D.position.y = (box.max.y - box.min.y) / 2
+        })
 
         if (modelData.background) {
           let scene = document.getElementById('scene');
           if (scene) {
             scene.setAttribute('background', 'color: ' + PALETTE.backgrounds[modelData.background])
+            tetra.setAttribute('color', PALETTE.backgrounds[modelData.background])
           }
         }
 
+        document.addEventListener("keydown", (e) => {
+          if (e.key === 'q') {
+            rx = rx + 5;
+          }
+          if (e.key === 'w') {
+            rx = rx - 5;
+          }
+          if (e.key === 'a') {
+            ry = ry + 5;
+          }
+          if (e.key === 's') {
+            ry = ry - 5;
+          }
+          if (e.key === 'z') {
+            rz = rz + 5;
+          }
+          if (e.key === 'x') {
+            rz = rz - 5;
+          }
+          // console.log('model scale ' + s.x)
+          // console.log('model scale ' + s.y)
+          // console.log('model scale ' + s.z)
+          console.log(`${rx} ${ry} ${rz}`)
+          tetra.setAttribute('rotation', `${rx} ${ry} ${rz}`)
+        });
+
       }
+
+
 
       function parseVoxels(mask) {
         var rows = mask.voxels.replaceAll('.', ' ').split('\n');
