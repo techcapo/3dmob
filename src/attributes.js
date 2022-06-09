@@ -251,6 +251,7 @@ var EARRINGS = {
 
 export default {
   defaults: {
+    family: 'Bananos',
     gender: 'Monkie',
     types: 'Brown',
     chain: 'None',
@@ -263,6 +264,7 @@ export default {
     background: 'Pale Green',
   },
   opts: {
+    family: ['Bananos', 'Orangutanos', 'Chimplinos'],
     gender: ['Monkie', 'Monkette'],
     types: Object.keys(TYPES),
     chain: ['None', 'Silver', 'Gold'],
