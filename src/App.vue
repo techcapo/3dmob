@@ -132,6 +132,8 @@ ${voxels}
           model.parentNode.removeChild(model);
 
         let container = document.getElementById('container');
+        container.textContent = '';
+
         model = render(container, 'a-entity', {
           id: "model",
           svox: { model: "MobMonkie" },
@@ -139,17 +141,44 @@ ${voxels}
           // animation: "property:rotation; from:0 0 0; to:0 360 0; loop: true; easing:linear; dur:5000",
         });
 
-        var rx = 35;
-        var ry = 0;
-        var rz = 45;
+        var FAMILIES = {
+          'Bananos': {
+            shape: 'a-tetrahedron',
+            props: {
+              color: '#FF926B',
+              radius: '.8',
+              position: "0 -0.26 0",
+              roughness: 0.1,
+              rotation: '35 0 45',
+            },
+          },
+          'Orangutanos': {
+            shape: 'a-box',
+            props: {
+              color: '#FF926B',
+              width: '.8',
+              height: '.8',
+              depth: '.8',
+              position: "0 -0.4 0",
+              roughness: 0.1,
+              rotation: '0 0 0',
+            },
+          },
+          'Chimplinos': {
+            shape: 'a-dodecahedron',
+            props: {
+              color: '#FF926B',
+              radius: '.8',
+              position: "0 -0.63 0",
+              roughness: 0.1,
+              rotation: '32 0 0',
+            },
+          },
+        }
 
-        var tetra = render(container, 'a-tetrahedron', {
-          color: '#FF926B',
-          radius: '.8',
-          position: "0 -0.26 0",
-          roughness: 0.1,
-          rotation: `${rx} ${ry} ${rz}`,
-        });
+        const fam = FAMILIES[modelData.family]
+
+        const body = render(container, fam.shape, fam.props);
 
         requestAnimationFrame(function(){
           var box = new THREE.Box3().setFromObject(model.object3D);
@@ -160,34 +189,41 @@ ${voxels}
           let scene = document.getElementById('scene');
           if (scene) {
             scene.setAttribute('background', 'color: ' + PALETTE.backgrounds[modelData.background])
-            tetra.setAttribute('color', PALETTE.backgrounds[modelData.background])
+            body.setAttribute('color', PALETTE.backgrounds[modelData.background])
           }
         }
 
+        const MIN_ROT = Math.PI / 100
         document.addEventListener("keydown", (e) => {
+          const r = body.object3D.rotation
+          const p = body.object3D.position
+          console.log(e.key)
           if (e.key === 'q') {
-            rx = rx + 5;
+            r.x = r.x + MIN_ROT;
           }
           if (e.key === 'w') {
-            rx = rx - 5;
+            r.x = r.x - MIN_ROT;
           }
           if (e.key === 'a') {
-            ry = ry + 5;
+            r.y = r.y + MIN_ROT;
           }
           if (e.key === 's') {
-            ry = ry - 5;
+            r.y = r.y - MIN_ROT;
           }
           if (e.key === 'z') {
-            rz = rz + 5;
+            r.z = r.z + MIN_ROT;
           }
           if (e.key === 'x') {
-            rz = rz - 5;
+            r.z = r.z - MIN_ROT;
           }
-          // console.log('model scale ' + s.x)
-          // console.log('model scale ' + s.y)
-          // console.log('model scale ' + s.z)
-          console.log(`${rx} ${ry} ${rz}`)
-          tetra.setAttribute('rotation', `${rx} ${ry} ${rz}`)
+          if (e.key === 'ArrowUp') {
+            p.y = p.y + 0.01
+          }
+          if (e.key === 'ArrowDown') {
+            p.y = p.y - 0.01
+          }
+          console.log(`pos ${p.x} ${p.y} ${p.z}`)
+          console.log(`rot ${r.x} ${r.y} ${r.z}`)
         });
 
       }

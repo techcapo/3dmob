@@ -284,6 +284,7 @@ export default {
   },
   createModel(attrs) {
     var modelData = {}
+    modelData.family = attrs.family
     modelData.gender = attrs.gender
     modelData.background = attrs.background
     modelData.hair = TYPES[attrs.types]
