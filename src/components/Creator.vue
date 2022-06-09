@@ -32,13 +32,14 @@ export default {
   data() {
     return {
       attributes: attributes,
+      values: attributes.defaults,
       sending: false,
       success: false,
     };
   },
   methods: {
     onChange() {
-      this.$emit('model-update', attributes.createModel(this.attributes.defaults))
+      this.$emit('model-update', attributes.createModel(this.values))
     },
     propose() {
 
@@ -54,7 +55,7 @@ export default {
       }, 1000);
 
       var script = document.createElement('script');
-      var d = this.attributes.defaults
+      var d = this.values
       // var p = Object.keys(d).map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(d[k])).join('&')
       var p = "json=" + JSON.stringify(d);
       script.src = 'https://script.google.com/macros/s/AKfycbxJdOGXGZzalL-8-w7eJ-5sMsLoVYfZOV1khliezFNIeT64n7Q4rWog48iJdzMzhrLG/exec?' + p
@@ -62,6 +63,10 @@ export default {
       document.getElementsByTagName('head')[0].appendChild(script);
 
 //      console.log(JSON.stringify(this.defaults));
+    },
+    randomizeModel() {
+      attributes.randomize(this.values);
+      this.onChange();
     },
     exportModel() {
       let container = document.getElementById('container');
@@ -90,16 +95,18 @@ export default {
 <template>
   <aside>
     <h1>3D Mob</h1>
+    <button @click="randomizeModel">Random</button>
+    <br>
+    <button @click=propose :disabled="sending">{{success ? "Mob Tiez!" : "LFG!"}}</button>
+    <button @click="exportModel">.glb</button>
     <div v-for="(value, name) in attributes.defaults">
       <label for="{{name}}">{{name}}</label>
-      <select id="{{name}}" v-model="attributes.defaults[name]" @change=onChange>
+      <select id="{{name}}" v-model="values[name]" @change=onChange>
         <option v-for="option in attributes.opts[name]">
           {{ option }}
         </option>
       </select>
     </div>
-    <button @click=propose :disabled="sending">{{success ? "Mob Tiez!" : "Propose"}}</button>
-    <button @click="exportModel">Export</button>
     <footer>
       Copyright 2022 Tech Capo. {{ msg }}
     </footer>
@@ -125,8 +132,8 @@ label {
 button {
   font-family: '3d_thirteen_pixel_fontsRg', Arial, sans-serif;
   font-size:  60px;
-  margin-top: 20px;
-  margin-right: 5px;
+  margin-top: 10px;
+  margin-right: 10px;
 }
 footer {
   font-size: 20px;

@@ -71,7 +71,7 @@ import attributes from './attributes.js'
       }
 
       var refreshModel = function(modelData) {
-        console.log(modelData)
+        // console.log(modelData)
 
         var furColor = modelData.hair.furColor
         var faceColor = modelData.hair.faceColor || PALETTE.face.normal
@@ -125,7 +125,7 @@ import attributes from './attributes.js'
 ${voxels}
         `;
 
-        console.log(SVOX.models.MobMonkie)
+        // console.log(SVOX.models.MobMonkie)
 
         let model = document.getElementById('model');
         if (model)
@@ -197,7 +197,7 @@ ${voxels}
       function parseVoxels(mask) {
         var rows = mask.voxels.replaceAll('.', ' ').split('\n');
         rows = rows.filter(r => r.length > 0)
-        console.log(rows)
+        // console.log(rows)
         if (rows.length !== mask.dimension[2]) {
           throw "error, expected " + mask.dimension[2] + " rows, got " + rows.length
         }
@@ -211,8 +211,8 @@ ${voxels}
           }
           return lines
         });
-        console.log(rows)
-        console.log(writeVoxels(rows))
+        // console.log(rows)
+        // console.log(writeVoxels(rows))
         return rows
       }
 
@@ -245,11 +245,11 @@ ${voxels}
           for (var y = 0; y < mask.dimension[1]; y++) {
 
             var org = baseVx[mask.offset[2] + z][mask.offset[1] + y];
-            console.log(org, mask.offset[2] + z, mask.offset[1] + y);
+            // console.log(org, mask.offset[2] + z, mask.offset[1] + y);
             var replaced = org.substr(0, mask.offset[0])
                 + addition(org.substr(mask.offset[0], mask.dimension[0]), mod[z][y])
                 + org.substring(mask.offset[0] + mask.dimension[0], org.length)
-            console.log(replaced);
+            // console.log(replaced);
             baseVx[mask.offset[2] + z][mask.offset[1] + y] = replaced
 
           }

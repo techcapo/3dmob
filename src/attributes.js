@@ -274,6 +274,12 @@ export default {
     hats: Object.keys(HATS),
     background: Object.keys(PALETTE.backgrounds),
   },
+  randomize(attrs) {
+    for (const key in attrs) {
+      const opts = this.opts[key]
+      attrs[key] = opts[Math.floor(Math.random() * opts.length)]
+    }
+  },
   createModel(attrs) {
     var modelData = {}
     modelData.gender = attrs.gender
