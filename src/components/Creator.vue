@@ -5,6 +5,9 @@ defineProps({
     required: true
   }
 })
+
+import { useWallet } from 'solana-wallets-vue';
+
 </script>
 
 <script>
@@ -43,6 +46,7 @@ export default {
     },
     propose() {
 
+      var pubk = useWallet().publicKey.value.toString();
       this.sending = true;
 
       setTimeout(() => {
@@ -57,7 +61,7 @@ export default {
       var script = document.createElement('script');
       var d = this.values
       // var p = Object.keys(d).map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(d[k])).join('&')
-      var p = "json=" + JSON.stringify(d);
+      var p = "json=" + JSON.stringify(d) + '&key=' + pubk;
       script.src = 'https://script.google.com/macros/s/AKfycbxJdOGXGZzalL-8-w7eJ-5sMsLoVYfZOV1khliezFNIeT64n7Q4rWog48iJdzMzhrLG/exec?' + p
       console.log(script.src)
       document.getElementsByTagName('head')[0].appendChild(script);
@@ -97,7 +101,7 @@ export default {
     <h1>3D Mob</h1>
     <button @click="randomizeModel">Random</button>
     <br>
-    <button @click=propose :disabled="sending">{{success ? "Mob Tiez!" : "LFG!"}}</button>
+    <button @click=propose :disabled="sending || !useWallet().connected.value">{{success ? "Mob Tiez!" : "LFG!"}}</button>
     <button @click="exportModel">.glb</button>
     <div v-for="(value, name) in attributes.defaults">
       <label for="{{name}}">{{name}}</label>
@@ -128,12 +132,6 @@ label {
   margin-top: 10px;
   display:  block;
   text-transform: capitalize;
-}
-button {
-  font-family: '3d_thirteen_pixel_fontsRg', Arial, sans-serif;
-  font-size:  60px;
-  margin-top: 10px;
-  margin-right: 10px;
 }
 footer {
   font-size: 20px;

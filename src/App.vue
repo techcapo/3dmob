@@ -5,6 +5,7 @@ import SVOX from './lib/smoothvoxels.1.1.0.min.js'
 import { RouterLink, RouterView } from 'vue-router'
 import Creator from '@/components/Creator.vue'
 import Viewer from '@/components/Viewer.vue'
+import Connector from '@/components/Connector.vue'
 </script>
 
 <script>
@@ -308,6 +309,7 @@ export default {
 <template>
   <Creator msg="WAGMI" @model-update="refreshModel" />
   <Viewer />
+  <Connector />
 </template>
 
 <style>

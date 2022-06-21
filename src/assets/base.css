@@ -7,3 +7,10 @@ h1 {
   font-size:  70px;
   font-weight: normal;
 }
+button {
+  font-family: '3d_thirteen_pixel_fontsRg', Arial, sans-serif;
+  font-size:  60px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
