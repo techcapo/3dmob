@@ -5,8 +5,8 @@ import gridhelper from 'aframe-gridhelper-component'
 
 <template>
   <main>
-  <a-scene gridhelper="colorGrid: #333; colorCenterLine: #888; size: 100; divisions: 100;" id="scene"
-  background="color: #000000"
+  <a-scene gridhelper="colorGrid: #eee; colorCenterLine: #fff; size: 200; divisions: 100;" id="scene"
+  background="color: #7CE3B6"
   vr-mode-ui="false" embedded
            renderer="highRefreshRate:true; logarithmicDepthBuffer:false; colorManagement: false;"
 

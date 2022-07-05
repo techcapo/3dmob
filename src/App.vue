@@ -189,7 +189,7 @@ ${voxels}
         if (modelData.background) {
           let scene = document.getElementById('scene');
           if (scene) {
-            // scene.setAttribute('background', 'color: ' + PALETTE.backgrounds[modelData.background])
+            scene.setAttribute('background', 'color: ' + PALETTE.backgrounds[modelData.background])
             body.setAttribute('color', PALETTE.backgrounds[modelData.background])
           }
         }
