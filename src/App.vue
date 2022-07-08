@@ -192,12 +192,12 @@ ${voxels}
               body.setAttribute('color', PALETTE.backgrounds[modelData.background])
 
               let envMap = [
-                "/px.png",
-                "/nx.png",
-                "/py.png",
-                "/ny.png",
-                "/pz.png",
-                "/nz.png",
+                "px.png",
+                "nx.png",
+                "py.png",
+                "ny.png",
+                "pz.png",
+                "nz.png",
               ];
               scene.object3D.environment = new THREE.CubeTextureLoader().load( envMap );
             }
