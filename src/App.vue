@@ -44,14 +44,14 @@ import attributes from './attributes.js'
 
       var BASE_DIM = [15, 19, 23,];
 
-
-
       var metalColor = function(value, code, noneColor, bling) {
         return value === 'Gold' ?
-`material lighting = flat, roughness = 0.0, metalness = 1, emissive = ${PALETTE.GOLD} 0.5
+`material lighting = flat, roughness = 0.1, metalness = 1
   colors = ${code}:${PALETTE.GOLD}` : value === 'Silver' ?
-`material lighting = flat, roughness = 0.0, metalness = 1, emissive = #BFBFBF 0.5
-  colors = ${code}:#BFBFBF` : bling ?
+`material lighting = flat, roughness = 0.1, metalness = 1
+  colors = ${code}:${PALETTE.SILVER}` : value === 'Bronze' ?
+`material lighting = flat, roughness = 0.2, metalness = 1
+  colors = ${code}:${PALETTE.BRONZE}` : bling ?
 // `material lighting = flat, roughness = 0.2
 //   colors = ${code}:${PALETTE.GOLD}` : value === 'Silver' ?
 // `material lighting = flat, roughness = 0.2
@@ -110,9 +110,9 @@ import attributes from './attributes.js'
           ${chainColor}
           ${earColor}
           ${mouthColor}
-          material lighting = flat, roughness = 0.2, metalness = 1, emissive = ${frameColor} 0.5
+          material lighting = flat, roughness = 0.2, metalness = 1
             colors = H:${frameColor}
-          material lighting = flat, roughness = 0.2, metalness = 0.5, emissive = ${lensColor} ${lensEmission}
+          material lighting = flat, roughness = 0.2, metalness = 1, emissive = ${lensColor} ${lensEmission}
             colors = I:${lensColor}
           material lighting = flat, emissive = ${smoking2Color} ${smokingEmission}
             colors = L:${smoking2Color}
@@ -126,7 +126,7 @@ import attributes from './attributes.js'
 ${voxels}
         `;
 
-        // console.log(SVOX.models.MobMonkie)
+        console.log(SVOX.models.MobMonkie)
 
         let model = document.getElementById('model');
         if (model)
@@ -149,7 +149,7 @@ ${voxels}
               color: '#FF926B',
               radius: '.8',
               position: "0 -0.26 0",
-              roughness: 0.1,
+              roughness: 0.2,
               rotation: '35 0 45',
             },
           },
@@ -161,7 +161,7 @@ ${voxels}
               // height: '.8',
               // depth: '.8',
               position: "0 -0.5 0",
-              roughness: 0.1,
+              roughness: 0.15,
               rotation: '0 0 0',
             },
           },
@@ -171,7 +171,7 @@ ${voxels}
               color: '#FF926B',
               radius: '.8',
               position: "0 -0.63 0",
-              roughness: 0.1,
+              roughness: 0.2,
               rotation: '32 0 0',
             },
           },
@@ -184,15 +184,26 @@ ${voxels}
         requestAnimationFrame(function(){
           var box = new THREE.Box3().setFromObject(model.object3D);
           model.object3D.position.y = (box.max.y - box.min.y) / 2
+
+          if (modelData.background) {
+            let scene = document.getElementById('scene');
+            if (scene) {
+              scene.setAttribute('background', 'color: ' + PALETTE.backgrounds[modelData.background])
+              body.setAttribute('color', PALETTE.backgrounds[modelData.background])
+
+              let envMap = [
+                "/px.png",
+                "/nx.png",
+                "/py.png",
+                "/ny.png",
+                "/pz.png",
+                "/nz.png",
+              ];
+              scene.object3D.environment = new THREE.CubeTextureLoader().load( envMap );
+            }
+          }
         })
 
-        if (modelData.background) {
-          let scene = document.getElementById('scene');
-          if (scene) {
-            scene.setAttribute('background', 'color: ' + PALETTE.backgrounds[modelData.background])
-            body.setAttribute('color', PALETTE.backgrounds[modelData.background])
-          }
-        }
 
         const MIN_ROT = Math.PI / 100
         document.addEventListener("keydown", (e) => {
