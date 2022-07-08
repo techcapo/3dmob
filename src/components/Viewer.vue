@@ -16,7 +16,7 @@ import gridhelper from 'aframe-gridhelper-component'
       position="0 1.8 2.5"
       look-controls="false"></a-entity>
     <a-entity class="light" visible="true"
-              light="type: hemisphere;  color: #FFF; groundColor: #7BF8C8; intensity: 0.5"></a-entity>
+              light="type: hemisphere;  color: #FFF; groundColor: #777; intensity: 0.2"></a-entity>
 <!--
     <a-entity class="light" visible="true" position="-1 1 1"
               light="type: directional; color: #FFF; intensity: 0.8;
