@@ -82,7 +82,7 @@ import attributes from './attributes.js'
         var mouthColor = metalColor(modelData.mouth, 'M', modelData.mouthColor || faceColor);
         var clothingColor = PALETTE.clothing[modelData.clothing] || furColor;
         var lensColor = modelData.shades.lensColor || PALETTE.BLACK;
-        var frameColor = modelData.shades.frameColor || PALETTE.BLACK;
+        var frameColor = modelData.shades.frameColor || PALETTE.BLACK_FRAME;
         var lensEmission = modelData.shades.lensEmission || 0.5;
 
         var smoking1Color = modelData.smoking.smoking1Color || PALETTE.BLACK;

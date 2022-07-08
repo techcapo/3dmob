@@ -39,7 +39,8 @@ var SHADES = {
   },
   Black: {
     addon: ADDONS.shade,
-    lensColor: PALETTE.BLACK,
+    lensColor: PALETTE.BLACK_FRAME,
+    lensEmission: 0.1,
   },
   Purple: {
     addon: ADDONS.shade,
