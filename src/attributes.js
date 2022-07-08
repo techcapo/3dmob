@@ -75,6 +75,25 @@ var SHADES = {
     lensEmission: 1,
     frameColor: PALETTE.LASER_FRAME,
   },
+  Bronze: {
+    addon: ADDONS.shade,
+    lensColor: PALETTE.BRONZE,
+    frameColor: PALETTE.BRONZE,
+    lensEmission: 0.2,
+  },
+  Silver: {
+    addon: ADDONS.shade,
+    lensColor: PALETTE.SILVER,
+    frameColor: PALETTE.SILVER,
+    lensEmission: 0.2,
+  },
+  Gold: {
+    addon: ADDONS.shade,
+    lensColor: PALETTE.GOLD,
+    frameColor: PALETTE.GOLD,
+    lensEmission: 0.2,
+  },
+
 }
 
 var SMOKING = {
@@ -218,6 +237,9 @@ var EARRINGS = {
   'Silver': {
     base: 'Silver',
   },
+  'Bronze': {
+    base: 'Bronze',
+  },
   'Gold Bar': {
     base: 'Gold',
     dangle: 'Gold',
@@ -267,7 +289,7 @@ export default {
     family: ['Bananos', 'Orangutanos', 'Chimplinos'],
     gender: ['Monkie', 'Monkette'],
     types: Object.keys(TYPES),
-    chain: ['None', 'Silver', 'Gold'],
+    chain: ['None', 'Bronze', 'Silver', 'Gold'],
     earrings: Object.keys(EARRINGS),
     mouth: Object.keys(PALETTE.mouth),
     clothing: Object.keys(PALETTE.clothing),

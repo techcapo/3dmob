@@ -4,8 +4,9 @@ var CAMO2 = '#054E12';
 var CAMO3 = '#40321E';
 var LASER_FRAME = '#4B4945';
 var SMOKE = '#6E6971';
-var GOLD = '#FFCD39';
+var GOLD = '#D4AF37';
 var SILVER = '#BFBFBF';
+var BRONZE = '#B08D57';
 
 var SOLANA1 = '#00FEC2'
 var SOLANA2 = '#01E8EC'
@@ -20,6 +21,7 @@ var PALETTE = {
   SMOKE: SMOKE,
   GOLD: GOLD,
   SILVER: SILVER,
+  BRONZE: BRONZE,
   SOLANA1: SOLANA1,
   SOLANA2: SOLANA2,
   SOLANA3: SOLANA3,
@@ -104,6 +106,7 @@ var PALETTE = {
     'None': null,
     'Gold': GOLD,
     'Silver': SILVER,
+    'Bronze': BRONZE,
     'Bubblegum': '#E56B8A',
     'Red': '#9C1C1E',
     'Esmeralda': '#76428B',
