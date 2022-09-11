@@ -72,24 +72,20 @@ export default {
       attributes.randomize(this.values);
       this.onChange();
     },
-    exportModel() {
-      let container = document.getElementById('container');
-      var options = {
-        // animation: 'property:rotation; from:0 0 0; to:0 360 0; loop: true; easing:linear; dur:5000',
-      };
-      console.log('exporting');
-      exporter.parse(
-        container.object3D,
-        // called when the gltf has been generated
-        function ( gltf ) {
-          console.log( gltf );
-          downloadJSON(gltf, "monkie.glb");
-        },
-        function ( error ) {
-          console.log( 'An error happened' );
-        },
-        options
-      );
+    screenshot() {
+
+      var w = window.open('', '');
+      w.document.title = "Screenshot";
+      //w.document.body.style.backgroundColor = "red";
+      var img = new Image();
+      // Without 'preserveDrawingBuffer' set to true, we must render now
+
+//      renderer.render(scene, camera);
+      var scene = document.querySelector('a-scene')
+      scene.render()
+      img.src = scene.renderer.domElement.toDataURL();
+      w.document.body.appendChild(img);
+
     }
   }
 }
@@ -101,8 +97,7 @@ export default {
     <h1>3D Mob</h1>
     <button @click="randomizeModel">Random</button>
     <br>
-    <button @click=propose :disabled="sending || !useWallet().connected.value">{{success ? "Mob Tiez!" : "LFG!"}}</button>
-    <button @click="exportModel">.glb</button>
+    <button @click="screenshot">shot</button>
     <div v-for="(value, name) in attributes.defaults">
       <label for="{{name}}">{{name}}</label>
       <select id="{{name}}" v-model="values[name]" @change=onChange>
