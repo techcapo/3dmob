@@ -81,7 +81,7 @@ import attributes from './attributes.js'
             mesh.traverse(function (node) {
               if (node.isMesh) {
                 console.log("yep")
-                node.material.color.set(PALETTE.GOLD)
+                node.material.color.set(PALETTE.SILVER)
                 node.material.metalness = 0.95
                 node.material.roughness = 0.2
               }
