@@ -31,33 +31,31 @@ import gridhelper from 'aframe-gridhelper-component'
 
 
     <a-entity class="light" visible="true"
-              light="type: hemisphere;  color: #FA67FF; groundColor: #00FEC2; intensity: 1"></a-entity>
+              light="type: hemisphere;  color: #DC1FFF; groundColor: #00FFA3; intensity: 1"></a-entity>
     <a-entity class="light" visible="true" position="-1 1 1"
-              light="type: directional; color: #01E8EC; intensity: 0.8;"></a-entity>
-
-    <a-entity class="light" visible="true" position="1 1 -1" light="type: directional; color: #01E8EC; intensity: 1;
-     castShadow:false; shadowBias:0.001;"></a-entity>
+              light="type: directional; color: #03E1FF; intensity: 0.8;"></a-entity>
 
 
-<a-entity light="type: point; color: #FA67FF; intensity: 1; distance: 40; decay: 2"
+
+<a-entity light="type: point; color: #DC1FFF; intensity: 1; distance: 40; decay: 2"
           position="10 1 1"></a-entity>
 
-<a-entity light="type: point; color: #00FEC2; intensity: 1; distance: 40; decay: 2"
+<a-entity light="type: point; color: #00FFA3; intensity: 1; distance: 40; decay: 2"
           position="-10 1 1"></a-entity>
 
-<a-entity light="type: point; color: #00FEC2; intensity: 1; distance: 40; decay: 2"
+<a-entity light="type: point; color: #fff; intensity: 1; distance: 40; decay: 2"
           position="-3 5 2"></a-entity>
 
-<a-entity light="type: point; color: #FA67FF; intensity: 1; distance: 40; decay: 2"
+<a-entity light="type: point; color: #fff; intensity: 1; distance: 40; decay: 2"
           position="3 5 2"></a-entity>
 
-<a-entity light="type: point; color: #FA67FF; intensity: 1; distance: 40; decay: 2"
+<a-entity light="type: point; color: #fff; intensity: 1; distance: 40; decay: 2"
           position="-3 -10 2"></a-entity>
 
-<a-entity light="type: point; color: #01E8EC; intensity: 1; distance: 40; decay: 2"
+<a-entity light="type: point; color: #fff; intensity: 1; distance: 40; decay: 2"
           position="10 3 20"></a-entity>
 
-<a-entity light="type: point; color: #01E8EC; intensity: 1; distance: 40; decay: 2"
+<a-entity light="type: point; color: #03E1FF; intensity: 1; distance: 40; decay: 2"
           position="-10 3 2"></a-entity>
 
 
