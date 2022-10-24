@@ -4,19 +4,22 @@ import gridhelper from 'aframe-gridhelper-component'
 
 <template>
   <main>
-  <a-scene gridhelper="colorGrid: #eee; colorCenterLine: #fff; size: 200; divisions: 100;" id="scene"
-  background="color: #7CE3B6"
+  <a-scene gridhelper="colorGrid: #444; colorCenterLine: #444; size: 200; divisions: 100;" id="scene"
+  background="color: #222"
   vr-mode-ui="false" embedded
            renderer="highRefreshRate:true; logarithmicDepthBuffer:false; colorManagement: false;"
 
            light="defaultLightsEnabled: true"
            >
 
+<a-entity light="type: ambient; color: #fff; intensity: 0.3" position="1 5 0"></a-entity>
+
+
+
+
     <a-entity id="camera" camera
       position="0 1.8 2.5"
       look-controls="false"></a-entity>
-    <a-entity class="light" visible="true"
-              light="type: hemisphere;  color: #FFF; groundColor: #777; intensity: 0.2"></a-entity>
 <!--
     <a-entity class="light" visible="true" position="-1 1 1"
               light="type: directional; color: #FFF; intensity: 0.8;

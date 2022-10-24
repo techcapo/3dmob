@@ -46,11 +46,11 @@ import attributes from './attributes.js'
 
       var metalColor = function(value, code, noneColor, bling) {
         return value === 'Gold' ?
-`material lighting = flat, roughness = 0.1, metalness = 1
+`material lighting = flat, roughness = 0.15, metalness = 0.9
   colors = ${code}:${PALETTE.GOLD}` : value === 'Silver' ?
-`material lighting = flat, roughness = 0.1, metalness = 1
+`material lighting = flat, roughness = 0.2, metalness = 0.9
   colors = ${code}:${PALETTE.SILVER}` : value === 'Bronze' ?
-`material lighting = flat, roughness = 0.2, metalness = 1
+`material lighting = flat, roughness = 0.2, metalness = 0.9
   colors = ${code}:${PALETTE.BRONZE}` : bling ?
 // `material lighting = flat, roughness = 0.2
 //   colors = ${code}:${PALETTE.GOLD}` : value === 'Silver' ?
@@ -188,7 +188,7 @@ ${voxels}
           if (modelData.background) {
             let scene = document.getElementById('scene');
             if (scene) {
-              scene.setAttribute('background', 'color: ' + PALETTE.backgrounds[modelData.background])
+//              scene.setAttribute('background', 'color: ' + PALETTE.backgrounds[modelData.background])
               body.setAttribute('color', PALETTE.backgrounds[modelData.background])
 
               let envMap = [
